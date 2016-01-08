@@ -7,6 +7,7 @@
 //
 
 #import "CiteisViewController.h"
+#import "CityMapViewController.h"
 
 @interface ViewController ()
 
@@ -47,4 +48,15 @@
     cell.textLabel.text = [cities objectAtIndex:indexPath.row];
     return cell;
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showCityMap"]) {
+        NSIndexPath *indexPath = [self.citiesTableView indexPathForSelectedRow];
+        CityMapViewController *destViewController = segue.destinationViewController;
+        destViewController.cityName = [cities objectAtIndex:indexPath.row];
+    }
+}
+
 @end
+
+
