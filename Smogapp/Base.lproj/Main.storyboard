@@ -23,6 +23,12 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2VA-G1-6Nx">
+                                <rect key="frame" x="0.0" y="105" width="320" height="468"/>
+                                <connections>
+                                    <outlet property="delegate" destination="nfS-6L-1Xd" id="5pr-Zn-4Qy"/>
+                                </connections>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -38,6 +44,7 @@
                     <connections>
                         <outlet property="backButton" destination="nOQ-IT-wFO" id="9Bw-eA-gkR"/>
                         <outlet property="cityLabel" destination="fhT-Fr-ZW7" id="8ah-BX-KQn"/>
+                        <outlet property="cityMapView" destination="2VA-G1-6Nx" id="PuE-qK-H7C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rXV-I9-KIr" userLabel="First Responder" sceneMemberID="firstResponder"/>

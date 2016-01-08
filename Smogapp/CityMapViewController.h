@@ -7,11 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
-@interface CityMapViewController : UIViewController
+
+@interface CityMapViewController : UIViewController  <MKMapViewDelegate>
+
+//labels
 @property (weak, nonatomic) IBOutlet UILabel *cityLabel;
 @property (nonatomic, strong) NSString *cityName;
+
+//buttons
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
+
+//actions
 - (IBAction)backButtonClick:(id)sender;
 
+//mapView
+@property (weak, nonatomic) IBOutlet MKMapView *cityMapView;
 @end
