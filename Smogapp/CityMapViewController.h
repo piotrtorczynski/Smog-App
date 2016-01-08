@@ -11,5 +11,7 @@
 @interface CityMapViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *cityLabel;
 @property (nonatomic, strong) NSString *cityName;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
+- (IBAction)backButtonClick:(id)sender;
 
 @end
