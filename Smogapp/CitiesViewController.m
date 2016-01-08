@@ -1,0 +1,50 @@
+//
+//  ViewController.m
+//  Smogapp
+//
+//  Created by Piotr Torczyski on 08/01/16.
+//  Copyright © 2016 Piotr Torczyski. All rights reserved.
+//
+
+#import "CiteisViewController.h"
+
+@interface ViewController ()
+
+@end
+
+@implementation ViewController{
+    NSArray *cities;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    cities = [NSArray arrayWithObjects:@"Kraków", @"Tarnów", @"Nowy Sącz", @"Olkusz", @"Skawina", @"Sucha Beskidzka", @"Szarów", @"Szymbark", @"Trzebinia", @"Zakopane", nil];
+    // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [cities count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *simpleTableIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    }
+    
+    cell.textLabel.text = [cities objectAtIndex:indexPath.row];
+    return cell;
+}
+@end
