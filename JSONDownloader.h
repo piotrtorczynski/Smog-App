@@ -17,6 +17,7 @@ typedef void (^JSONDownloaderCompletionBlock)(BOOL parseSuccess, NSArray *respon
 - (void)getAllCities :(JSONDownloaderCompletionBlock)callback;
 - (void)getAllInformationFromCity: (NSString*) city :(JSONDownloaderCompletionBlock)callback;
 - (void)getAllInformationFromCityAndLocation: (NSString*) city :(NSString *) location :(JSONDownloaderCompletionBlock)callback;
+- (void)getParameterFromCityAndLocation: (NSString*) city :(NSString *) location :(NSString*) parameterType:(JSONDownloaderCompletionBlock)callback;
 
 - (void)getLastInformationFromCity: (NSString*) city :(JSONDownloaderCompletionBlock)callback;
 - (void)getLastInformationFromCityAndLocation: (NSString*) city :(NSString *) location :(JSONDownloaderCompletionBlock)callback;

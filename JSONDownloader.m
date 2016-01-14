@@ -56,6 +56,10 @@ NSString * SERVICE_URL=@"http://powietrze.malopolska.pl/data/data.php";
     [self getServerResponeFor:[NSString stringWithFormat:@"type=measurement&city=%@&lcation=%@", city,location] withResults:callback];
 }
 
+- (void)getParameterFromCityAndLocation: (NSString*) city :(NSString *) location :(NSString*) parameterType: (JSONDownloaderCompletionBlock)callback{
+    [self getServerResponeFor:[NSString stringWithFormat:@"type=lastmeasurement&city=%@&lcation=%@&parameter=%@", city,location, parameterType] withResults:callback];
+}
+
 - (void)getLastInformationFromCity: (NSString*) city :(JSONDownloaderCompletionBlock)callback{
     [self getServerResponeFor:[NSString stringWithFormat:@"type=lastmeasurement&city=%@", city] withResults:callback];
 }
