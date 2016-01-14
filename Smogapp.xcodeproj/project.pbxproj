@@ -17,7 +17,11 @@
 		D203636D1C3FF068002664D0 /* Smogapp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D203636B1C3FF068002664D0 /* Smogapp.xcdatamodeld */; };
 		D203636F1C3FF068002664D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D203636E1C3FF068002664D0 /* Assets.xcassets */; };
 		D20363721C3FF068002664D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D20363701C3FF068002664D0 /* LaunchScreen.storyboard */; };
-		D29C1D471C47D08800669C69 /* JSONtoCoreDataImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = D29C1D461C47D08800669C69 /* JSONtoCoreDataImporter.m */; };
+		D29C1D5D1C47D88000669C69 /* Station+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D29C1D561C47D88000669C69 /* Station+CoreDataProperties.m */; };
+		D29C1D5E1C47D88000669C69 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = D29C1D581C47D88000669C69 /* Station.m */; };
+		D29C1D5F1C47D88000669C69 /* Pollution+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D29C1D5A1C47D88000669C69 /* Pollution+CoreDataProperties.m */; };
+		D29C1D601C47D88000669C69 /* Pollution.m in Sources */ = {isa = PBXBuildFile; fileRef = D29C1D5C1C47D88000669C69 /* Pollution.m */; };
+		D29C1D631C47D91000669C69 /* JSONParserToCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = D29C1D621C47D91000669C69 /* JSONParserToCoreData.m */; };
 		D2EFB8261C45182100F54FC1 /* JSONDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EFB8251C45182100F54FC1 /* JSONDownloader.m */; };
 /* End PBXBuildFile section */
 
@@ -37,8 +41,16 @@
 		D203636E1C3FF068002664D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D20363711C3FF068002664D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D20363731C3FF068002664D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D29C1D451C47D08800669C69 /* JSONtoCoreDataImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONtoCoreDataImporter.h; sourceTree = "<group>"; };
-		D29C1D461C47D08800669C69 /* JSONtoCoreDataImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONtoCoreDataImporter.m; sourceTree = "<group>"; };
+		D29C1D551C47D88000669C69 /* Station+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Station+CoreDataProperties.h"; path = "CoreDataClasess/Station+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D29C1D561C47D88000669C69 /* Station+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Station+CoreDataProperties.m"; path = "CoreDataClasess/Station+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D29C1D571C47D88000669C69 /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Station.h; path = CoreDataClasess/Station.h; sourceTree = "<group>"; };
+		D29C1D581C47D88000669C69 /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Station.m; path = CoreDataClasess/Station.m; sourceTree = "<group>"; };
+		D29C1D591C47D88000669C69 /* Pollution+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Pollution+CoreDataProperties.h"; path = "CoreDataClasess/Pollution+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D29C1D5A1C47D88000669C69 /* Pollution+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Pollution+CoreDataProperties.m"; path = "CoreDataClasess/Pollution+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D29C1D5B1C47D88000669C69 /* Pollution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pollution.h; path = CoreDataClasess/Pollution.h; sourceTree = "<group>"; };
+		D29C1D5C1C47D88000669C69 /* Pollution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Pollution.m; path = CoreDataClasess/Pollution.m; sourceTree = "<group>"; };
+		D29C1D611C47D91000669C69 /* JSONParserToCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONParserToCoreData.h; sourceTree = "<group>"; };
+		D29C1D621C47D91000669C69 /* JSONParserToCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONParserToCoreData.m; sourceTree = "<group>"; };
 		D2EFB8241C45182100F54FC1 /* JSONDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONDownloader.h; path = ../JSONDownloader.h; sourceTree = "<group>"; };
 		D2EFB8251C45182100F54FC1 /* JSONDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONDownloader.m; path = ../JSONDownloader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,6 +71,7 @@
 		D20363531C3FF068002664D0 = {
 			isa = PBXGroup;
 			children = (
+				D29C1D541C47D82600669C69 /* CoreDataClasess */,
 				D203635E1C3FF068002664D0 /* Smogapp */,
 				D203635D1C3FF068002664D0 /* Products */,
 			);
@@ -77,8 +90,8 @@
 			children = (
 				D2EFB8241C45182100F54FC1 /* JSONDownloader.h */,
 				D2EFB8251C45182100F54FC1 /* JSONDownloader.m */,
-				D29C1D451C47D08800669C69 /* JSONtoCoreDataImporter.h */,
-				D29C1D461C47D08800669C69 /* JSONtoCoreDataImporter.m */,
+				D29C1D611C47D91000669C69 /* JSONParserToCoreData.h */,
+				D29C1D621C47D91000669C69 /* JSONParserToCoreData.m */,
 				D20363621C3FF068002664D0 /* AppDelegate.h */,
 				D20363631C3FF068002664D0 /* AppDelegate.m */,
 				D20363651C3FF068002664D0 /* CiteisViewController.h */,
@@ -103,6 +116,21 @@
 				D20363601C3FF068002664D0 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D29C1D541C47D82600669C69 /* CoreDataClasess */ = {
+			isa = PBXGroup;
+			children = (
+				D29C1D551C47D88000669C69 /* Station+CoreDataProperties.h */,
+				D29C1D561C47D88000669C69 /* Station+CoreDataProperties.m */,
+				D29C1D571C47D88000669C69 /* Station.h */,
+				D29C1D581C47D88000669C69 /* Station.m */,
+				D29C1D591C47D88000669C69 /* Pollution+CoreDataProperties.h */,
+				D29C1D5A1C47D88000669C69 /* Pollution+CoreDataProperties.m */,
+				D29C1D5B1C47D88000669C69 /* Pollution.h */,
+				D29C1D5C1C47D88000669C69 /* Pollution.m */,
+			);
+			name = CoreDataClasess;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,13 +203,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D29C1D5F1C47D88000669C69 /* Pollution+CoreDataProperties.m in Sources */,
 				D20363671C3FF068002664D0 /* CitiesViewController.m in Sources */,
-				D29C1D471C47D08800669C69 /* JSONtoCoreDataImporter.m in Sources */,
 				05BC56441C403B2600FAB24F /* CityMapViewController.m in Sources */,
 				D20363641C3FF068002664D0 /* AppDelegate.m in Sources */,
+				D29C1D5D1C47D88000669C69 /* Station+CoreDataProperties.m in Sources */,
 				D20363611C3FF068002664D0 /* main.m in Sources */,
 				D2EFB8261C45182100F54FC1 /* JSONDownloader.m in Sources */,
+				D29C1D601C47D88000669C69 /* Pollution.m in Sources */,
+				D29C1D631C47D91000669C69 /* JSONParserToCoreData.m in Sources */,
 				D203636D1C3FF068002664D0 /* Smogapp.xcdatamodeld in Sources */,
+				D29C1D5E1C47D88000669C69 /* Station.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
