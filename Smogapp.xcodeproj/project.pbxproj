@@ -17,6 +17,7 @@
 		D203636D1C3FF068002664D0 /* Smogapp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D203636B1C3FF068002664D0 /* Smogapp.xcdatamodeld */; };
 		D203636F1C3FF068002664D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D203636E1C3FF068002664D0 /* Assets.xcassets */; };
 		D20363721C3FF068002664D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D20363701C3FF068002664D0 /* LaunchScreen.storyboard */; };
+		D29C1D471C47D08800669C69 /* JSONtoCoreDataImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = D29C1D461C47D08800669C69 /* JSONtoCoreDataImporter.m */; };
 		D2EFB8261C45182100F54FC1 /* JSONDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EFB8251C45182100F54FC1 /* JSONDownloader.m */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,8 @@
 		D203636E1C3FF068002664D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D20363711C3FF068002664D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D20363731C3FF068002664D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D29C1D451C47D08800669C69 /* JSONtoCoreDataImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONtoCoreDataImporter.h; sourceTree = "<group>"; };
+		D29C1D461C47D08800669C69 /* JSONtoCoreDataImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONtoCoreDataImporter.m; sourceTree = "<group>"; };
 		D2EFB8241C45182100F54FC1 /* JSONDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONDownloader.h; path = ../JSONDownloader.h; sourceTree = "<group>"; };
 		D2EFB8251C45182100F54FC1 /* JSONDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONDownloader.m; path = ../JSONDownloader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,6 +77,8 @@
 			children = (
 				D2EFB8241C45182100F54FC1 /* JSONDownloader.h */,
 				D2EFB8251C45182100F54FC1 /* JSONDownloader.m */,
+				D29C1D451C47D08800669C69 /* JSONtoCoreDataImporter.h */,
+				D29C1D461C47D08800669C69 /* JSONtoCoreDataImporter.m */,
 				D20363621C3FF068002664D0 /* AppDelegate.h */,
 				D20363631C3FF068002664D0 /* AppDelegate.m */,
 				D20363651C3FF068002664D0 /* CiteisViewController.h */,
@@ -171,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D20363671C3FF068002664D0 /* CitiesViewController.m in Sources */,
+				D29C1D471C47D08800669C69 /* JSONtoCoreDataImporter.m in Sources */,
 				05BC56441C403B2600FAB24F /* CityMapViewController.m in Sources */,
 				D20363641C3FF068002664D0 /* AppDelegate.m in Sources */,
 				D20363611C3FF068002664D0 /* main.m in Sources */,

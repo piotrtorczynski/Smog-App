@@ -15,7 +15,10 @@
 
 @end
 
+
 @implementation JSONDownloader
+
+void(^getServerResponseForUrlCallback)(BOOL success, NSArray *response, NSError *error);
 
 NSString * SERVICE_URL=@"http://powietrze.malopolska.pl/data/data.php";
 
@@ -41,10 +44,29 @@ NSString * SERVICE_URL=@"http://powietrze.malopolska.pl/data/data.php";
     
     return self;
 }
+- (void)getAllCities :(JSONDownloaderCompletionBlock)callback{
+    [self getServerResponeFor:[NSString stringWithFormat:@"type=lastmeasurement"] withResults:callback];
+}
 
-- (void)getAllInformationFromCity:(NSString*)city results:(void (^)(NSArray *results))callback{
+- (void)getAllInformationFromCity: (NSString*) city :(JSONDownloaderCompletionBlock)callback{
+    [self getServerResponeFor:[NSString stringWithFormat:@"type=measurement&city=%@", city] withResults:callback];
+}
+
+- (void)getAllInformationFromCityAndLocation: (NSString*) city :(NSString *) location :(JSONDownloaderCompletionBlock)callback{
+    [self getServerResponeFor:[NSString stringWithFormat:@"type=measurement&city=%@&lcation=%@", city,location] withResults:callback];
+}
+
+- (void)getLastInformationFromCity: (NSString*) city :(JSONDownloaderCompletionBlock)callback{
+    [self getServerResponeFor:[NSString stringWithFormat:@"type=lastmeasurement&city=%@", city] withResults:callback];
+}
+
+- (void)getLastInformationFromCityAndLocation: (NSString*) city :(NSString *) location :(JSONDownloaderCompletionBlock)callback{
+    [self getServerResponeFor:[NSString stringWithFormat:@"type=lastmeasurement&city=%@&lcation=%@", city,location] withResults:callback];
+}
+
+- (void)getServerResponeFor:(NSString*) body withResults:(JSONDownloaderCompletionBlock)callback{
     
-    NSString *urlString = [NSString stringWithFormat:@"%@?type=measurement&city=%@",SERVICE_URL, city];
+    NSString *urlString = [NSString stringWithFormat:@"%@?%@",SERVICE_URL, body];
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
@@ -69,32 +91,14 @@ NSString * SERVICE_URL=@"http://powietrze.malopolska.pl/data/data.php";
                     NSLog(@"Error parsing JSON: %@", jsonError);
                 } else {
                     success = YES;
-                    callback(dataArray);
+                    callback(success, dataArray, error);
                 }
             }
             else {
                 NSLog(@"suno :%@", error);
-                callback(nil);
-            }
+                callback(NO, nil, error);            }
         });
     }];
     [getDataTask resume];
-    
-    
-    //    [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:
-    //      ^(NSData *data, NSURLResponse *response, NSError *error) {
-    //          id result = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
-    //          if ([result isKindOfClass:[NSDictionary class]]) {
-    //              NSArray *results = result[@"result"];
-    //              callback(results);
-    //              NSNumber* numberOfPages = result[@"number_of_pages"];
-    //              NSUInteger nextPage = city + 1;
-    //              if (nextPage < numberOfPages.unsignedIntegerValue) {
-    //                  [self fetchAllPods:callback city:nextPage];
-    //              }
-    //          }
-    //      }] resume];
-    
-    
 }
 @end
