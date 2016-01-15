@@ -30,10 +30,13 @@
 	<array>
 		<string>armv7</string>
 	</array>
-    <key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSAllowsArbitraryLoads</key><true/>
-    </dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Czy chcesz uzyc lokalizacji?</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

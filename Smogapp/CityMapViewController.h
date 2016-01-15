@@ -25,4 +25,6 @@
 
 //mapView
 @property (weak, nonatomic) IBOutlet MKMapView *cityMapView;
+@property(nonatomic, retain) CLLocationManager *locationManager;
+
 @end

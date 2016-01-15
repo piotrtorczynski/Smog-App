@@ -21,6 +21,16 @@
     // Do any additional setup after loading the view.
     self.cityLabel.text = self.cityName;
     self.cityMapView.delegate = self;
+   
+    
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+
+        // Use one or the other, not both. Depending on what you put in info.plist
+        [self.locationManager requestWhenInUseAuthorization];
+        [self.locationManager requestAlwaysAuthorization];
+   
     
 }
 
