@@ -8,6 +8,7 @@
 
 #import "CiteisViewController.h"
 #import "CityMapViewController.h"
+#import "JSONParserToCoreData.h"
 
 @interface ViewController ()
 
@@ -54,6 +55,7 @@
         NSIndexPath *indexPath = [self.citiesTableView indexPathForSelectedRow];
         CityMapViewController *destViewController = segue.destinationViewController;
         destViewController.cityName = [cities objectAtIndex:indexPath.row];
+        
     }
 }
 

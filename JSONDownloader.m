@@ -44,7 +44,7 @@ NSString * SERVICE_URL=@"http://powietrze.malopolska.pl/data/data.php";
     
     return self;
 }
-- (void)getAllCities :(JSONDownloaderCompletionBlock)callback{
+- (void)getAllCitiesFromCallback :(JSONDownloaderCompletionBlock)callback{
     [self getServerResponeFor:[NSString stringWithFormat:@"type=lastmeasurement"] withResults:callback];
 }
 
@@ -56,7 +56,8 @@ NSString * SERVICE_URL=@"http://powietrze.malopolska.pl/data/data.php";
     [self getServerResponeFor:[NSString stringWithFormat:@"type=measurement&city=%@&lcation=%@", city,location] withResults:callback];
 }
 
-- (void)getParameterFromCityAndLocation: (NSString*) city :(NSString *) location :(NSString*) parameterType: (JSONDownloaderCompletionBlock)callback{
+
+- (void)getParameterFromCityAndLocation: (NSString*) city location:(NSString *)location parameterType:(NSString*)parameterType callback:(JSONDownloaderCompletionBlock)callback{
     [self getServerResponeFor:[NSString stringWithFormat:@"type=lastmeasurement&city=%@&lcation=%@&parameter=%@", city,location, parameterType] withResults:callback];
 }
 
@@ -64,7 +65,7 @@ NSString * SERVICE_URL=@"http://powietrze.malopolska.pl/data/data.php";
     [self getServerResponeFor:[NSString stringWithFormat:@"type=lastmeasurement&city=%@", city] withResults:callback];
 }
 
-- (void)getLastInformationFromCityAndLocation: (NSString*) city :(NSString *) location :(JSONDownloaderCompletionBlock)callback{
+- (void)getAllParametersFromCityAndLocation:(NSString*)city location:(NSString *)location callback:(JSONDownloaderCompletionBlock)callback{
     [self getServerResponeFor:[NSString stringWithFormat:@"type=lastmeasurement&city=%@&lcation=%@", city,location] withResults:callback];
 }
 
@@ -88,14 +89,15 @@ NSString * SERVICE_URL=@"http://powietrze.malopolska.pl/data/data.php";
                 
                 NSError *jsonError;
                 BOOL success = NO;
-                NSArray *dataArray = [[NSArray alloc] init];
-                dataArray = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &jsonError];
+                
+                id dataFetch = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &jsonError];
                 
                 if (jsonError) {
                     NSLog(@"Error parsing JSON: %@", jsonError);
                 } else {
+                    NSLog(@"Fetched ok");
                     success = YES;
-                    callback(success, dataArray, error);
+                    callback(success, dataFetch, error);
                 }
             }
             else {

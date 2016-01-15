@@ -5,7 +5,7 @@
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="station" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Station" inverseName="parameters" inverseEntity="Station" syncable="YES"/>
+        <relationship name="station" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Station" inverseName="parameters" inverseEntity="Station" syncable="YES"/>
     </entity>
     <entity name="Station" representedClassName="Station" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
@@ -16,7 +16,7 @@
         <relationship name="parameters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pollution" inverseName="station" inverseEntity="Pollution" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Station" positionX="-918" positionY="-108" width="128" height="133"/>
         <element name="Pollution" positionX="-441" positionY="-9" width="128" height="118"/>
+        <element name="Station" positionX="-918" positionY="-108" width="128" height="133"/>
     </elements>
 </model>

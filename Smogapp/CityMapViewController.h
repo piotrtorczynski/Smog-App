@@ -21,6 +21,7 @@
 
 //actions
 - (IBAction)backButtonClick:(id)sender;
+- (IBAction)checkJSONParsing:(id)sender;
 
 //mapView
 @property (weak, nonatomic) IBOutlet MKMapView *cityMapView;

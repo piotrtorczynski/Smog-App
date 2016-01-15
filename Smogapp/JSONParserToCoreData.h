@@ -12,7 +12,9 @@
 
 @property (nonatomic) NSManagedObjectContext *context;
 
--(void)parseCitiesFromJSON:(NSDictionary *)JSON;
--(void)parsePollutionFromJSON:(NSDictionary *)JSON;
--(void)parseCitiesFromJSON:(NSDictionary *)JSON;
+-(void)parseCitiesFromJSON:(id)JSON;
+-(void)parsePollutionFromJSON:(id)JSON;
+-(void)parseStationFromJSON:(id)JSON;
+
 @end
+
