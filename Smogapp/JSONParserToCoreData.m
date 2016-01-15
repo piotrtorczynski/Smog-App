@@ -41,7 +41,7 @@
                 [mutableJSON removeObjectForKey:key];
             }
         }
-              returnData = [mutableJSON copy];
+        returnData = [mutableJSON copy];
     }
     else if([JSON isKindOfClass:[NSArray class]]){
         
@@ -63,7 +63,7 @@
         
         NSLog(@"Error in casting response");
     }
-
+    
     
     return returnData;
 }
@@ -77,22 +77,22 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:context];
-  
+    
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
     
     for (id dict in sanitizedJSONArray){
         for(id key in dict){
-        
+            
             station.city = dict[@"citydesc"];
             station.name = dict[@"parameterdesc"];
             station.longitude =[f numberFromString: dict[@"long"]];
             station.lattitude = [f numberFromString:dict[@"lat"]];
-
+            
         }
-}
+    }
     NSLog(@"%@",station.longitude);
-    
+     NSLog(@"%@",station.lattitude);
 }
 
 -(void)parsePollutionFromJSON:(id)JSON{
@@ -106,13 +106,23 @@
     pollution.value = sanitizedJSON[@"value"];
     
 }
--(void)parseStationFromJSON:(id)JSON{
+-(NSSet *)parseStationFromJSON:(id)JSON{
     NSDictionary *sanitizedJSON = [self sanitizedDictionaryWithJSON:JSON];
-    Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:self.context];
     
-    station.city = sanitizedJSON[@"citydesc"];
-    station.name = sanitizedJSON[@"locaiondesc"];
-    station.longitude = sanitizedJSON[@"long"];
-    station.lattitude = sanitizedJSON[@"lat"];
+//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+//    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+//    Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:context];
+//
+//    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+//    f.numberStyle = NSNumberFormatterDecimalStyle;
+    
+    NSSet* locations;
+    for (id dict in sanitizedJSON){
+        locations = [NSSet setWithArray: [sanitizedJSON valueForKey: @"location"]];
+//        NSLog(@"%@", locations);
+    }
+    
+    return locations;
+    
 }
 @end

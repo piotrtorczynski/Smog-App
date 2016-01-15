@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *citiesTableView;
 
-@property(nonatomic) NSString *cityName;
+@property(nonatomic) NSString *cityNameForRequest;
 
 @end
 
