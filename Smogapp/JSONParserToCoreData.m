@@ -8,10 +8,13 @@
 
 #import "JSONParserToCoreData.h"
 #import "Station+CoreDataProperties.h"
+#import "Pollution+CoreDataProperties.h"
 
 @interface JSONParserToCoreData()
 @property NSInteger counterOfResurces;
 @property NSInteger cityNumber;
+@property NSArray* citiesArrayFromRawJSON;
+
 @end
 
 @implementation JSONParserToCoreData
@@ -41,13 +44,31 @@
     
     Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:self.context];
     
-    station.city = sanitizedJSON[@"citydesc"];
-    station.name = sanitizedJSON[@"locaiondesc"];
-    station.longitude = sanitizedJSON[@"long"];
-    station.lattitude = sanitizedJSON[@"lat"];
-//    [station addParametersObject: ]
+//    station.city = sanitizedJSON[@"citydesc"];
+//    station.name = sanitizedJSON[@"locaiondesc"];
+//    station.longitude = sanitizedJSON[@"long"];
+//    station.lattitude = sanitizedJSON[@"lat"];
+
+    
+//    NSArray *citiesArray = sanitizedJSON[@"city"];
+//    self.citiesArrayFromRawJSON = [[NSMutableArray alloc]init];
+//    for(NSNumber * cityName in citiesArray){
+//    
+//        NSLog(@"City name: %@",cityName);
+//        [self.citiesArrayFromRawJSON obj];
+//    }
 
 }
 
-
+-(void)parsePollutionFromJSON:(NSDictionary *)JSON{
+    NSDictionary *sanitizedJSON = [self sanitizedDictionaryWithJSON:JSON];
+    
+    Pollution *pollution = [NSEntityDescription insertNewObjectForEntityForName:@"Pollution" inManagedObjectContext:self.context];
+    
+    pollution.date = sanitizedJSON[@"date"];
+    pollution.desc = sanitizedJSON[@"caqidesc"];
+    pollution.name = sanitizedJSON[@"parameterdesc"];
+    pollution.value = sanitizedJSON[@"value"];
+    
+   }
 @end
