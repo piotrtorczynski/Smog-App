@@ -54,8 +54,46 @@
     if ([segue.identifier isEqualToString:@"showCityMap"]) {
         NSIndexPath *indexPath = [self.citiesTableView indexPathForSelectedRow];
         CityMapViewController *destViewController = segue.destinationViewController;
+        
+        
         destViewController.cityName = [cities objectAtIndex:indexPath.row];
         
+        
+        NSString *cellName = [cities objectAtIndex:indexPath.row];
+        NSLog(@"%@", cellName);
+        
+        
+        //krakow, tarnow, nowysacz, olkusz, skawina, suchabeskidzka, szarow, szymbark, trzebinia, zakopane
+        if ([cellName  isEqual: @"Kraków"]) {
+            self.cityName = @"krakow";
+        }
+        else if([cellName  isEqual: @"Tarnów"]) {
+            self.cityName = @"tarnow";
+        }
+        else if([cellName  isEqual: @"Nowy Sącz"]) {
+            self.cityName = @"nowysacz";
+        }
+        else if([cellName  isEqual: @"Olkusz"]) {
+            self.cityName = @"olkusz";
+        }
+        else if([cellName  isEqual: @"Skawina"]) {
+            self.cityName = @"skawina";
+        }
+        else if([cellName  isEqual: @"Sucha Beskidzka"]) {
+            self.cityName = @"suchabeskidzka";
+        }
+        else if([cellName  isEqual: @"Szymbark"]) {
+            self.cityName = @"szymbark";
+        }
+        else if([cellName  isEqual: @"Szarów"]) {
+            self.cityName = @"szarow";
+        }
+        else if([cellName  isEqual: @"Trzebinia"]) {
+            self.cityName = @"trzebinia";
+        }
+        else if([cellName  isEqual: @"Zakopane"]) {
+            self.cityName = @"zakopane";
+        }
     }
 }
 
