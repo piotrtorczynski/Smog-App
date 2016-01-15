@@ -53,12 +53,12 @@ NSString * SERVICE_URL=@"http://powietrze.malopolska.pl/data/data.php";
 }
 
 - (void)getAllInformationFromCityAndLocation: (NSString*) city :(NSString *) location :(JSONDownloaderCompletionBlock)callback{
-    [self getServerResponeFor:[NSString stringWithFormat:@"type=measurement&city=%@&lcation=%@", city,location] withResults:callback];
+    [self getServerResponeFor:[NSString stringWithFormat:@"type=measurement&city=%@&location=%@", city,location] withResults:callback];
 }
 
 
 - (void)getParameterFromCityAndLocation: (NSString*) city location:(NSString *)location parameterType:(NSString*)parameterType callback:(JSONDownloaderCompletionBlock)callback{
-    [self getServerResponeFor:[NSString stringWithFormat:@"type=lastmeasurement&city=%@&lcation=%@&parameter=%@", city,location, parameterType] withResults:callback];
+    [self getServerResponeFor:[NSString stringWithFormat:@"type=lastmeasurement&city=%@&location=%@&parameter=%@", city,location, parameterType] withResults:callback];
 }
 
 - (void)getLastInformationFromCity: (NSString*) city :(JSONDownloaderCompletionBlock)callback{
@@ -75,8 +75,7 @@ NSString * SERVICE_URL=@"http://powietrze.malopolska.pl/data/data.php";
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
-    //    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    //    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+    NSLog(@"%@", request);
     __weak JSONDownloader *weakSelf = self;
     [request setTimeoutInterval:240];
     request.HTTPMethod = @"GET";
