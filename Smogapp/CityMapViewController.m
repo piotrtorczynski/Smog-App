@@ -76,7 +76,7 @@
             [downloader getAllParametersFromCityAndLocation:self.cityNameForRequest location:[self.cityLocations objectAtIndex:i] callback:^(BOOL parseSuccess, id response, NSError *connectionError) {
                 NSLog(@"%@",[self.cityLocations objectAtIndex:i]);
 //                NSLog(@"petla w trakcie");
-                [self.parser parseCitiesFromJSON:response];
+                [self.parser parseStationFromLocationJSON:response];
                 
                 
             }];
