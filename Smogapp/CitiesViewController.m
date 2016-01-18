@@ -55,7 +55,6 @@
         NSIndexPath *indexPath = [self.citiesTableView indexPathForSelectedRow];
         CityMapViewController *destViewController = segue.destinationViewController;
         
-        
         destViewController.cityName = [cities objectAtIndex:indexPath.row];
         
     }

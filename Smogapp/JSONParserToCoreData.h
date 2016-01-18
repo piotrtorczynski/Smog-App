@@ -14,7 +14,10 @@
 
 -(void)parseCitiesFromJSON:(id)JSON;
 -(void)parsePollutionFromJSON:(id)JSON;
--(NSSet *)parseStationFromJSON:(id)JSON;
+-(void)parseStationFromLocationJSON:(id)JSON;
+
+-(NSArray *)parseLocationFromJSON:(id)JSON;
+
 
 @end
 

@@ -70,19 +70,26 @@
     JSONDownloader *downloader = [[JSONDownloader alloc]init];
     [downloader getAllInformationFromCity:self.cityNameForRequest callback:^(BOOL parseSuccess, id response, NSError *connectionError) {
         self.parser = [[JSONParserToCoreData alloc]init];
-        //        [self.parser parseStationFromJSON:response];
-        
-        self.cityLocations =  [[self.parser parseStationFromJSON:response ] allObjects];
+        self.cityLocations = [self.parser parseLocationFromJSON:response];
         
         for(NSInteger i = 0; i<self.cityLocations.count; i++){
             [downloader getAllParametersFromCityAndLocation:self.cityNameForRequest location:[self.cityLocations objectAtIndex:i] callback:^(BOOL parseSuccess, id response, NSError *connectionError) {
                 NSLog(@"%@",[self.cityLocations objectAtIndex:i]);
+//                NSLog(@"petla w trakcie");
                 [self.parser parseCitiesFromJSON:response];
+                
+                
             }];
         }
-    }
-     
-     ];
+
+        
+        
+    }];
+    
+    
+    
+ NSLog(@"petla przed");
+    
     
 }
 

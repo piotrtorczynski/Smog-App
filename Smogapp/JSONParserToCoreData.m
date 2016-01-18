@@ -29,7 +29,7 @@
     return self;
 }
 
-- (NSDictionary *)sanitizedDictionaryWithJSON:(id)JSON {
+- (id )sanitizedDictionaryWithJSON:(id)JSON {
     id returnData;
     
     if([JSON isKindOfClass:[NSDictionary class]]){
@@ -69,10 +69,52 @@
 }
 
 
+-(NSArray *)parseLocationFromJSON:(id)JSON{
+    
+    NSDictionary *sanitizedJSON = [self sanitizedDictionaryWithJSON:JSON];
+    NSArray *cityLocations;
+    
+    
+    NSSet* locations;
+    for (id dict in sanitizedJSON){
+        locations = [NSSet setWithArray: [sanitizedJSON valueForKey: @"location"]];
+        NSLog(@"%@", locations);
+    }
+    cityLocations =  [locations allObjects];
+    return cityLocations;
+    
+}
+
+
 
 -(void)parseCitiesFromJSON:(id)JSON{
     
-    NSDictionary *sanitizedJSONArray = [self sanitizedDictionaryWithJSON:JSON];
+    id sanitizedJSONArray = [self sanitizedDictionaryWithJSON:JSON];
+    
+    if([JSON isKindOfClass:[NSDictionary class]]){
+        
+        NSMutableDictionary *mutableJSON = [JSON mutableCopy];
+        
+        for (NSString *key in mutableJSON.allKeys) {
+            //tutaj sie dzieje
+        }
+        //        returnData = [mutableJSON copy];
+    }
+    else if([JSON isKindOfClass:[NSArray class]]){
+        
+        NSMutableDictionary *sanitezJSON ;
+        NSMutableArray *mutableJSONArray = [JSON mutableCopy];
+        
+        for (sanitezJSON in mutableJSONArray) {
+            
+            for (NSString *key in sanitezJSON.allKeys) {
+                //tutaj tez}
+                
+            }
+            //        returnData = [mutableJSONArray copy];
+        }
+    }
+    
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
@@ -82,18 +124,23 @@
     f.numberStyle = NSNumberFormatterDecimalStyle;
     
     for (id dict in sanitizedJSONArray){
+        
         for(id key in dict){
+            //            NSLog(@"%d",i++);
             
             station.city = dict[@"citydesc"];
             station.name = dict[@"parameterdesc"];
-            station.longitude =[f numberFromString: dict[@"long"]];
-            station.lattitude = [f numberFromString:dict[@"lat"]];
+            station.longitude = [f numberFromString: dict[@"long"]];
+            station.lattitude = [f numberFromString: dict[@"lat"]];
             
         }
     }
+    
+    
     NSLog(@"%@",station.longitude);
-     NSLog(@"%@",station.lattitude);
+    NSLog(@"%@",station.lattitude);
 }
+
 
 -(void)parsePollutionFromJSON:(id)JSON{
     NSDictionary *sanitizedJSON = [self sanitizedDictionaryWithJSON:JSON];
@@ -106,23 +153,57 @@
     pollution.value = sanitizedJSON[@"value"];
     
 }
--(NSSet *)parseStationFromJSON:(id)JSON{
+
+-(void)parseStationFromLocationJSON:(id)JSON{
     NSDictionary *sanitizedJSON = [self sanitizedDictionaryWithJSON:JSON];
     
-//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-//    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-//    Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:context];
-//
-//    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-//    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
     
-    NSSet* locations;
-    for (id dict in sanitizedJSON){
-        locations = [NSSet setWithArray: [sanitizedJSON valueForKey: @"location"]];
-//        NSLog(@"%@", locations);
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:context];
+    Pollution *pollution = [NSEntityDescription insertNewObjectForEntityForName:@"Pollution" inManagedObjectContext:context];
+    
+    
+    if([JSON isKindOfClass:[NSDictionary class]]){
+        
+        NSMutableDictionary *mutableJSON = [JSON mutableCopy];
+        
+        for (NSString *key in mutableJSON.allKeys) {
+            
+            pollution.date = sanitizedJSON[@"date"];
+            pollution.desc = sanitizedJSON[@"caqidesc"];
+            pollution.name = sanitizedJSON[@"parameterdesc"];
+            pollution.value = sanitizedJSON[@"value"];
+            
+            station.city = sanitizedJSON[@"citydesc"];
+            station.name = sanitizedJSON[@"parameterdesc"];
+            station.longitude = [f numberFromString: sanitizedJSON[@"long"]];
+            station.lattitude = [f numberFromString: sanitizedJSON[@"lat"]];
+            
+        }
+        
+    }
+    else if([JSON isKindOfClass:[NSArray class]]){
+        
+        NSMutableDictionary *sanitezJSON ;
+        NSMutableArray *mutableJSONArray = [JSON mutableCopy];
+        
+        for (sanitezJSON in mutableJSONArray) {
+            
+            for (NSString *key in sanitezJSON.allKeys) {
+            
+                
+            }
+            
+        }
     }
     
-    return locations;
+    
+    
     
 }
 @end

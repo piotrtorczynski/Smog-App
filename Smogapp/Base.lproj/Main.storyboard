@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--City Map View Controller-->
@@ -17,20 +18,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="city" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhT-Fr-ZW7">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="city" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhT-Fr-ZW7">
                                 <rect key="frame" x="20" y="72" width="123" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="3gk-hk-447"/>
+                                    <constraint firstAttribute="width" constant="123" id="Zu2-9k-Ngc"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2VA-G1-6Nx">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2VA-G1-6Nx">
                                 <rect key="frame" x="0.0" y="105" width="320" height="468"/>
                                 <connections>
                                     <outlet property="delegate" destination="nfS-6L-1Xd" id="5pr-Zn-4Qy"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zPj-Dc-Acu">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zPj-Dc-Acu">
                                 <rect key="frame" x="126" y="75" width="159" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="159" id="J7l-fI-UQx"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="checkJSONParsing:" destination="nfS-6L-1Xd" eventType="touchUpInside" id="hQF-0M-fSs"/>
@@ -38,6 +46,16 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2VA-G1-6Nx" firstAttribute="leading" secondItem="ek4-FQ-8qO" secondAttribute="leading" id="1m0-GB-hm8"/>
+                            <constraint firstItem="fhT-Fr-ZW7" firstAttribute="bottom" secondItem="zPj-Dc-Acu" secondAttribute="bottom" id="62l-Hv-qhy"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="2VA-G1-6Nx" secondAttribute="bottom" constant="-5" id="7yV-UD-Z9S"/>
+                            <constraint firstItem="2VA-G1-6Nx" firstAttribute="top" secondItem="fhT-Fr-ZW7" secondAttribute="bottom" id="LhJ-u4-f5o"/>
+                            <constraint firstItem="fhT-Fr-ZW7" firstAttribute="top" secondItem="k2t-wF-OrJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Lqo-GT-ErY"/>
+                            <constraint firstItem="fhT-Fr-ZW7" firstAttribute="leading" secondItem="ek4-FQ-8qO" secondAttribute="leadingMargin" constant="4" id="dUw-9n-4Qt"/>
+                            <constraint firstAttribute="trailing" secondItem="2VA-G1-6Nx" secondAttribute="trailing" id="hy6-zi-gke"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zPj-Dc-Acu" secondAttribute="trailing" constant="19" id="iJR-lv-0cH"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yW8-YY-zhE">
                         <barButtonItem key="leftBarButtonItem" title="&lt;Wstecz" id="nOQ-IT-wFO">
@@ -70,7 +88,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1oK-Fb-luu">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1oK-Fb-luu">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -78,7 +96,7 @@
                                         <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xda-Lq-eu7" id="Eqf-XE-8DF">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
@@ -93,6 +111,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1oK-Fb-luu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6pq-YU-Haj"/>
+                            <constraint firstItem="1oK-Fb-luu" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Dqd-qs-gFr"/>
+                            <constraint firstItem="1oK-Fb-luu" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Iml-EW-QvR"/>
+                            <constraint firstAttribute="trailing" secondItem="1oK-Fb-luu" secondAttribute="trailing" id="cnw-qD-wOp"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Wybierz miasto:" id="F9S-T1-asb"/>
                     <connections>

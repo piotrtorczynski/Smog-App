@@ -2,7 +2,7 @@
 //  Station+CoreDataProperties.m
 //  Smogapp
 //
-//  Created by Piotr Torczyski on 14/01/16.
+//  Created by Piotr Torczyski on 18/01/16.
 //  Copyright © 2016 Piotr Torczyski. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,10 +14,10 @@
 @implementation Station (CoreDataProperties)
 
 @dynamic city;
-@dynamic name;
-@dynamic parameter;
 @dynamic lattitude;
 @dynamic longitude;
+@dynamic name;
+@dynamic parameter;
 @dynamic parameters;
 
 @end
