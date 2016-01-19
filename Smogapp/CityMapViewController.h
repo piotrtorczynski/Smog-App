@@ -18,6 +18,7 @@
 
 //buttons
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
+@property (weak, nonatomic) IBOutlet UIButton *changeMapTypeButton;
 
 //actions
 - (IBAction)backButtonClick:(id)sender;

@@ -73,6 +73,10 @@
     
     NSLog(@"%@", self.cityNameForRequest);
     
+    [self.changeMapTypeButton addTarget:self action:@selector(changeMapType:) forControlEvents:UIControlEventTouchDown];
+    [self.changeMapTypeButton setTitle:@"Zmień rodzaj mapy" forState:UIControlStateNormal];
+
+    
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
   
@@ -106,6 +110,7 @@
     NSNumber *longitude = [[NSNumber alloc]init];
     
     NSString *description;
+    NSString *parameterdescription;
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Station"];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"city == %@", self.cityNameForRequest]];
@@ -118,7 +123,8 @@
             lattitude = station.lattitude;
             longitude = station.longitude;
             description = station.locationdesc;
-            NSLog(@"%f %f",station.lattitude.doubleValue, station.longitude.doubleValue );
+            parameterdescription = station.name;
+//            NSLog(@"%f %f",station.lattitude.doubleValue, station.longitude.doubleValue );
         }
         
     }
@@ -131,11 +137,11 @@
     pinCoordinate.latitude = lattitude.doubleValue;
     point.coordinate = pinCoordinate;
     point.title =  description;
-    point.subtitle = @"I'm here!!!";
+    point.subtitle = parameterdescription;
     
     
     [self.cityMapView addAnnotation:point];
-        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(point.coordinate, 15000, 15000);
+        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(point.coordinate, 18000, 18000);
         [self.cityMapView setRegion:[self.cityMapView regionThatFits:region] animated:YES];
     
 }
@@ -150,13 +156,25 @@
 }
 
 - (IBAction)checkJSONParsing:(id)sender {
-    JSONDownloader *downloader = [[JSONDownloader alloc]init];
-    [downloader getParameterFromCityAndLocation:@"krakow" location:@"bujaka" parameterType:@"caqi" callback:^(BOOL parseSuccess, id response, NSError *connectionError) {
-        
-        self.parser = [[JSONParserToCoreData alloc]init];
-        [self.parser parseLocationFromJSON:response];
-    }];
     
+    [self.changeMapTypeButton addTarget:self action:@selector(changeMapType:) forControlEvents:UIControlEventTouchDown];
+    [self.changeMapTypeButton setTitle:@"Zmień rodzaj mapy" forState:UIControlStateNormal];
+     
+     
+     
+//     initWithTitle: @"Type"
+//     style:UIBarButtonItemStylePlain
+//     target: self
+//     action:@selector(changeMapType:)] ;
+//    
+}
+
+- (void) changeMapType: (id)sender
+{
+    if (self.cityMapView.mapType == MKMapTypeStandard)
+        self.cityMapView.mapType = MKMapTypeSatellite;
+    else
+        self.cityMapView.mapType = MKMapTypeStandard;
 }
 
 @end

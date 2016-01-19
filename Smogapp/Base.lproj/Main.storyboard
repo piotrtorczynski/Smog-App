@@ -39,7 +39,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="159" id="J7l-fI-UQx"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Zmień rodzaj mapy"/>
                                 <connections>
                                     <action selector="checkJSONParsing:" destination="nfS-6L-1Xd" eventType="touchUpInside" id="hQF-0M-fSs"/>
                                 </connections>
@@ -68,6 +68,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="backButton" destination="nOQ-IT-wFO" id="9Bw-eA-gkR"/>
+                        <outlet property="changeMapTypeButton" destination="zPj-Dc-Acu" id="54l-Fo-3vk"/>
                         <outlet property="cityLabel" destination="fhT-Fr-ZW7" id="8ah-BX-KQn"/>
                         <outlet property="cityMapView" destination="2VA-G1-6Nx" id="PuE-qK-H7C"/>
                     </connections>
