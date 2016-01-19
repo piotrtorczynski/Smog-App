@@ -28,7 +28,7 @@
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         
         self.context = appDelegate.managedObjectContext;
-
+        
         
     }
     return self;
@@ -81,81 +81,22 @@
     
     
     NSSet* locations;
-    for (id dict in sanitizedJSON){
-        locations = [NSSet setWithArray: [sanitizedJSON valueForKey: @"location"]];
-        NSLog(@"%@", locations);
-    }
+    //for (id dict in sanitizedJSON){
+    locations = [NSSet setWithArray: [sanitizedJSON valueForKey: @"location"]];
+    NSLog(@"%@", locations);
+    //}
     cityLocations =  [locations allObjects];
     return cityLocations;
     
 }
 
-
-
--(void)parseCitiesFromJSON:(id)JSON{
-    
-    id sanitizedJSONArray = [self sanitizedDictionaryWithJSON:JSON];
-    
-    if([JSON isKindOfClass:[NSDictionary class]]){
-        
-        NSMutableDictionary *mutableJSON = [JSON mutableCopy];
-        
-        for (NSString *key in mutableJSON.allKeys) {
-            //tutaj sie dzieje
-        }
-        //        returnData = [mutableJSON copy];
-    }
-    else if([JSON isKindOfClass:[NSArray class]]){
-        
-        NSMutableDictionary *sanitezJSON ;
-        NSMutableArray *mutableJSONArray = [JSON mutableCopy];
-        
-        for (sanitezJSON in mutableJSONArray) {
-            
-            for (NSString *key in sanitezJSON.allKeys) {
-                //tutaj tez}
-                
-            }
-            //        returnData = [mutableJSONArray copy];
-        }
-    }
-    
-    
-  
-    Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:self.context];
-    
-    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-    f.numberStyle = NSNumberFormatterDecimalStyle;
-    
-    for (id dict in sanitizedJSONArray){
-        
-        for(id key in dict){
-            //            NSLog(@"%d",i++);
-            
-            station.city = dict[@"citydesc"];
-            station.name = dict[@"parameterdesc"];
-            station.longitude = [f numberFromString: dict[@"long"]];
-            station.lattitude = [f numberFromString: dict[@"lat"]];
-            
-        }
-    }
-}
-
-
-
-
 -(void)parseStationFromLocationJSON:(id)JSON{
     NSDictionary *sanitizedJSON = [self sanitizedDictionaryWithJSON:JSON];
     
+    NSError *error = nil;
+    
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
-    
-    
-    NSError *error = nil;
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
-    
     
     if([JSON isKindOfClass:[NSDictionary class]]){
         Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:self.context];
@@ -164,72 +105,68 @@
         NSMutableDictionary *mutableJSON = [JSON mutableCopy];
         
         for (NSString *key in mutableJSON.allKeys) {
-            
-            NSLog(@"%@",mutableJSON);
             pollution.date = sanitizedJSON[@"date"];
-            pollution.desc = sanitizedJSON[@"caqidesc"];
+            
+            if ([sanitizedJSON[@"caqidesc"] isEqualToString:@"null"]) {
+                pollution.desc = sanitizedJSON[@"aqidesc"];
+            } else {
+                pollution.desc = sanitizedJSON[@"caqidesc"];
+            }
+            
             pollution.name = sanitizedJSON[@"parameterdesc"];
             pollution.value = sanitizedJSON[@"value"];
             
-            station.city = sanitizedJSON[@"citydesc"];
+            station.city = sanitizedJSON[@"city"];
             station.name = sanitizedJSON[@"parameterdesc"];
+            station.locationdesc = sanitizedJSON[@"locationdesc"];
             station.longitude = [f numberFromString: sanitizedJSON[@"long"]];
             station.lattitude = [f numberFromString: sanitizedJSON[@"lat"]];
             [station addParametersObject:pollution];
         }
-     
-        if (![[self context] save:&error]) {
-            NSLog(@"Unable to save managed object context for pollution.");
-            NSLog(@"%@, %@", error, error.localizedDescription);
-        }
         
-        if (![[self context] save:&error]) {
-            NSLog(@"Unable to save managed object context for station.");
-            NSLog(@"%@, %@", error, error.localizedDescription);
-        }
         
     }
     else if([JSON isKindOfClass:[NSArray class]]){
         Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:self.context];
-        NSMutableDictionary *sanitezJSON ;
+        NSMutableDictionary *dictionaryJSON ;
         NSMutableArray *mutableJSONArray = [JSON mutableCopy];
         
-        for (sanitezJSON in mutableJSONArray) {
+        for (dictionaryJSON in mutableJSONArray) {
             
-            station.city = sanitezJSON[@"citydesc"];
-            station.name = sanitezJSON[@"parameterdesc"];
-            station.longitude = [f numberFromString: sanitezJSON[@"long"]];
-            station.lattitude = [f numberFromString: sanitezJSON[@"lat"]];
+            station.city = dictionaryJSON[@"city"];
+            station.name = dictionaryJSON[@"parameterdesc"];
+            station.locationdesc = dictionaryJSON[@"locationdesc"];
+            station.longitude = [f numberFromString: dictionaryJSON[@"long"]];
+            station.lattitude = [f numberFromString: dictionaryJSON[@"lat"]];
             
-            NSLog(@"longitude %@",station.longitude);
-            NSLog(@"lattitude %@",station.lattitude);
             
-            for (NSString *key in sanitezJSON.allKeys) {
+            for (NSString *key in dictionaryJSON.allKeys) {
+                
                 Pollution *pollution = [NSEntityDescription insertNewObjectForEntityForName:@"Pollution" inManagedObjectContext:self.context];
-                pollution.date = sanitezJSON[@"date"];
-                pollution.desc = sanitezJSON[@"caqidesc"];
-                pollution.name = sanitezJSON[@"parameterdesc"];
-                pollution.value = [ f numberFromString:sanitezJSON[@"value"]];
+                pollution.date = dictionaryJSON[@"date"];
+                
+                if ([dictionaryJSON[@"caqidesc"] isEqualToString: @"null"]) {
+                    pollution.desc = dictionaryJSON[@"aqidesc"];
+                } else {
+                    pollution.desc = dictionaryJSON[@"caqidesc"];
+                }
+                
+                pollution.name = dictionaryJSON[@"parameterdesc"];
+                pollution.value = [ f numberFromString:dictionaryJSON[@"value"]];
                 
                 [station addParametersObject:pollution];
-                NSLog(@"Date %@",pollution.date);
-                NSLog(@"Description %@",pollution.desc);
-             
-                if (![[self context]  save:&error]) {
-                    NSLog(@"Unable to save managed object context for pollution.");
-                    NSLog(@"%@, %@", error, error.localizedDescription);
-                }
+                
                 
             }
             
         }
-//globalny
-        if (![[self context] save:&error]) {
-            NSLog(@"Unable to save managed object context for station.");
-            NSLog(@"%@, %@", error, error.localizedDescription);
-        }
+        
     }
-     
+    
+    if (![self.context save:&error]) {
+        NSLog(@"Unable to save managed object context for station.");
+        NSLog(@"%@, %@", error, error.localizedDescription);
+    }
     
     
 }

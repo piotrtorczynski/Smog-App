@@ -10,6 +10,7 @@
     <entity name="Station" representedClassName="Station" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lattitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="locationdesc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="parameter" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,6 +18,6 @@
     </entity>
     <elements>
         <element name="Pollution" positionX="-441" positionY="-9" width="128" height="118"/>
-        <element name="Station" positionX="-918" positionY="-108" width="128" height="133"/>
+        <element name="Station" positionX="-918" positionY="-108" width="128" height="148"/>
     </elements>
 </model>

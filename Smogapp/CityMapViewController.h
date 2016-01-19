@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 
 
-@interface CityMapViewController : UIViewController  <MKMapViewDelegate>
+@interface CityMapViewController : UIViewController  <MKMapViewDelegate, CLLocationManagerDelegate>
 
 //labels
 @property (weak, nonatomic) IBOutlet UILabel *cityLabel;
@@ -27,4 +27,5 @@
 @property (weak, nonatomic) IBOutlet MKMapView *cityMapView;
 @property(nonatomic, retain) CLLocationManager *locationManager;
 
+@property (nonatomic) NSManagedObjectContext *context;
 @end

@@ -10,21 +10,34 @@
 #import "JSONParserToCoreData.h"
 #import "JSONDownloader.h"
 #import "CiteisViewController.h"
+#import "AppDelegate.h"
+#import "Station+CoreDataProperties.h"
 
 @interface CityMapViewController ()
 @property (nonatomic) JSONParserToCoreData *parser;
 @property NSArray *cityLocations;
 @property NSString *cityNameForRequest;
+@property NSArray *pointsLocations;
+
 @end
 
 @implementation CityMapViewController
 
+
+
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    self.context = appDelegate.managedObjectContext;
+
+
     self.cityLabel.text = self.cityName;
     self.cityMapView.delegate = self;
+    
     NSString *cellName = self.cityName;
     
     if ([cellName  isEqual: @"Kraków"]) {
@@ -62,8 +75,8 @@
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
-    
-    // Use one or the other, not both. Depending on what you put in info.plist
+  
+
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager requestAlwaysAuthorization];
     
@@ -75,21 +88,57 @@
         for(NSInteger i = 0; i<self.cityLocations.count; i++){
             [downloader getAllParametersFromCityAndLocation:self.cityNameForRequest location:[self.cityLocations objectAtIndex:i] callback:^(BOOL parseSuccess, id response, NSError *connectionError) {
                 NSLog(@"%@",[self.cityLocations objectAtIndex:i]);
-//                NSLog(@"petla w trakcie");
                 [self.parser parseStationFromLocationJSON:response];
-                
+                [self setAnnotationsStations];
+
                 
             }];
         }
+       
+             }];
+   
+   
+}
 
+-(void)setAnnotationsStations{
+    
+    
+   
+    
+    NSNumber *lattitude = [[NSNumber alloc]init];
+    NSNumber *longitude = [[NSNumber alloc]init];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Station"];
+  [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"city == %@", self.cityNameForRequest]];
+    self.pointsLocations = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+
+    NSString *description;
+    
+    if (self.pointsLocations.count >0) {
+        for(Station *station in self.pointsLocations){
+            lattitude = station.lattitude;
+            longitude = station.longitude;
+            description = station.locationdesc;
+            NSLog(@"%f %f",station.lattitude.doubleValue, station.longitude.doubleValue );
+        }
         
-        
-    }];
+    }
     
     
+    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
     
- NSLog(@"petla przed");
+    CLLocationCoordinate2D pinCoordinate;
+    pinCoordinate.longitude = longitude.doubleValue;
+    pinCoordinate.latitude = lattitude.doubleValue;
+    point.coordinate = pinCoordinate;
+    point.title =  description;
+    point.subtitle = @"I'm here!!!";
     
+    
+    [self.cityMapView addAnnotation:point];
+        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(point.coordinate, 15000, 15000);
+        [self.cityMapView setRegion:[self.cityMapView regionThatFits:region] animated:YES];
     
 }
 
@@ -107,17 +156,10 @@
     [downloader getParameterFromCityAndLocation:@"krakow" location:@"bujaka" parameterType:@"caqi" callback:^(BOOL parseSuccess, id response, NSError *connectionError) {
         
         self.parser = [[JSONParserToCoreData alloc]init];
-        [self.parser parseCitiesFromJSON:response];
+        [self.parser parseLocationFromJSON:response];
     }];
     
 }
 
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
-    
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
-    [self.cityMapView setRegion:[self.cityMapView regionThatFits:region] animated:YES];
-    
-}
 
 @end
