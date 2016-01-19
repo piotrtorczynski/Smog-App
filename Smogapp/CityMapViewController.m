@@ -102,18 +102,16 @@
 
 -(void)setAnnotationsStations{
     
-    
-   
-    
     NSNumber *lattitude = [[NSNumber alloc]init];
     NSNumber *longitude = [[NSNumber alloc]init];
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Station"];
-  [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"city == %@", self.cityNameForRequest]];
-    self.pointsLocations = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    
-
     NSString *description;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Station"];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"city == %@", self.cityNameForRequest]];
+    
+    self.pointsLocations = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
+
     
     if (self.pointsLocations.count >0) {
         for(Station *station in self.pointsLocations){
@@ -160,6 +158,5 @@
     }];
     
 }
-
 
 @end
