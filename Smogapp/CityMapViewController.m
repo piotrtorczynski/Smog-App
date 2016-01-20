@@ -184,9 +184,22 @@
 {
     if (self.cityMapView.mapType == MKMapTypeStandard)
         self.cityMapView.mapType = MKMapTypeSatellite;
-    else
-        self.cityMapView.mapType = MKMapTypeStandard;
-}
+    
+    else if(self.cityMapView.mapType == MKMapTypeSatellite)
+    {
+         self.cityMapView.mapType = MKMapTypeHybrid;
 
+    }
+    else{
+        self.cityMapView.mapType = MKMapTypeStandard;
+    }
+}
+        //
+//- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+//    MyLocation *location = (MyLocation*)view.annotation;
+//    
+//    NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving};
+//    [location.mapItem openInMapsWithLaunchOptions:launchOptions];
+//}
 
 @end
