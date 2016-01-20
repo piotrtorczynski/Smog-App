@@ -71,6 +71,7 @@
 		D20363531C3FF068002664D0 = {
 			isa = PBXGroup;
 			children = (
+				D273E1E41C4F95A9008949F1 /* Annotation */,
 				D29C1D541C47D82600669C69 /* CoreDataClasess */,
 				D203635E1C3FF068002664D0 /* Smogapp */,
 				D203635D1C3FF068002664D0 /* Products */,
@@ -116,6 +117,13 @@
 				D20363601C3FF068002664D0 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D273E1E41C4F95A9008949F1 /* Annotation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Annotation;
 			sourceTree = "<group>";
 		};
 		D29C1D541C47D82600669C69 /* CoreDataClasess */ = {

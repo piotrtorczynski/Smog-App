@@ -133,15 +133,36 @@
     pinCoordinate.longitude = longitude.doubleValue;
     pinCoordinate.latitude = lattitude.doubleValue;
     point.coordinate = pinCoordinate;
-    point.title =  description;
-    point.subtitle = parameterdescription;
-    
-    
+    point.title = [NSString stringWithFormat:@"Lokalizacja: %@", description];
+
     [self.cityMapView addAnnotation:point];
         MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(point.coordinate, 18000, 18000);
         [self.cityMapView setRegion:[self.cityMapView regionThatFits:region] animated:YES];
     
 }
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    static NSString *identifier = @"MyLocation";
+    if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
+        
+        MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [self.cityMapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if (annotationView == nil) {
+            annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            annotationView.enabled = YES;
+            annotationView.canShowCallout = YES;
+            annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            
+//                        annotationView.image = [UIImage imageNamed:@"arrest.png"];//here we use a nice image instead of the default pins
+        } else {
+            annotationView.annotation = annotation;
+        }
+        
+        return annotationView;
+    }
+    
+    return nil;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -166,5 +187,6 @@
     else
         self.cityMapView.mapType = MKMapTypeStandard;
 }
+
 
 @end
