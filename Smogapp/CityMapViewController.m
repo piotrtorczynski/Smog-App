@@ -94,14 +94,11 @@
                 NSLog(@"%@",[self.cityLocations objectAtIndex:i]);
                 [self.parser parseStationFromLocationJSON:response];
                 [self setAnnotationsStations];
-
-                
-            }];
+                }];
         }
        
-             }];
-   
-   
+    }];
+
 }
 
 -(void)setAnnotationsStations{
@@ -124,7 +121,7 @@
             longitude = station.longitude;
             description = station.locationdesc;
             parameterdescription = station.name;
-//            NSLog(@"%f %f",station.lattitude.doubleValue, station.longitude.doubleValue );
+           NSLog(@"%f %f",station.lattitude.doubleValue, station.longitude.doubleValue );
         }
         
     }
@@ -159,14 +156,7 @@
     
     [self.changeMapTypeButton addTarget:self action:@selector(changeMapType:) forControlEvents:UIControlEventTouchDown];
     [self.changeMapTypeButton setTitle:@"Zmień rodzaj mapy" forState:UIControlStateNormal];
-     
-     
-     
-//     initWithTitle: @"Type"
-//     style:UIBarButtonItemStylePlain
-//     target: self
-//     action:@selector(changeMapType:)] ;
-//    
+    
 }
 
 - (void) changeMapType: (id)sender

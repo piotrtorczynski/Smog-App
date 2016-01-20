@@ -12,10 +12,7 @@
 #import "AppDelegate.h"
 
 @interface JSONParserToCoreData()
-@property NSInteger counterOfResurces;
-@property NSInteger cityNumber;
 @property NSArray *citiesArrayFromRawJSON;
-
 @end
 
 @implementation JSONParserToCoreData
@@ -23,7 +20,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         
-        self.counterOfResurces = 0;
+
         
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         
@@ -127,19 +124,29 @@
         
     }
     else if([JSON isKindOfClass:[NSArray class]]){
+        
         Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:self.context];
         NSMutableDictionary *dictionaryJSON ;
         NSMutableArray *mutableJSONArray = [JSON mutableCopy];
+        
+        NSNumberFormatter *formater = [[NSNumberFormatter alloc] init];
+        formater.numberStyle = NSNumberFormatterCurrencyStyle;
         
         for (dictionaryJSON in mutableJSONArray) {
             
             station.city = dictionaryJSON[@"city"];
             station.name = dictionaryJSON[@"parameterdesc"];
             station.locationdesc = dictionaryJSON[@"locationdesc"];
-            station.longitude = [f numberFromString: dictionaryJSON[@"long"]];
-            station.lattitude = [f numberFromString: dictionaryJSON[@"lat"]];
             
+         //   NSString *longString = dictionaryJSON[@"long"];
             
+            station.longitude =  [NSNumber numberWithDouble:[dictionaryJSON[@"long"] doubleValue]];
+            
+            //station.longitude = [formater numberFromString:longString];
+            station.lattitude = [NSNumber numberWithDouble:[dictionaryJSON[@"lat"] doubleValue]];
+
+            
+             
             for (NSString *key in dictionaryJSON.allKeys) {
                 
                 Pollution *pollution = [NSEntityDescription insertNewObjectForEntityForName:@"Pollution" inManagedObjectContext:self.context];
@@ -150,9 +157,9 @@
                 } else {
                     pollution.desc = dictionaryJSON[@"caqidesc"];
                 }
-                
                 pollution.name = dictionaryJSON[@"parameterdesc"];
-                pollution.value = [ f numberFromString:dictionaryJSON[@"value"]];
+                pollution.value = [NSNumber numberWithDouble:[dictionaryJSON[@"long"] integerValue]];
+
                 
                 [station addParametersObject:pollution];
                 
