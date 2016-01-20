@@ -12,6 +12,7 @@
 #import "CiteisViewController.h"
 #import "AppDelegate.h"
 #import "Station+CoreDataProperties.h"
+#import "StationResultTableViewController.h"
 
 @interface CityMapViewController ()
 @property (nonatomic) JSONParserToCoreData *parser;
@@ -159,6 +160,28 @@
 }
 
 
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    if (![view.annotation isKindOfClass:[MKPointAnnotation class]])
+        return;
+    
+    [self performSegueWithIdentifier:@"pushDBResults" sender:view];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(MKAnnotationView *)sender
+{
+    if ([segue.identifier isEqualToString:@"pushDBResults"])
+    {
+        StationResultTableViewController *destinationViewController = segue.destinationViewController;
+        
+        // grab the annotation from the sender
+        
+//        destinationViewController.stationName = self.cityNameForRequest;
+    } else {
+        NSLog(@"PFS:something else");
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -189,12 +212,5 @@
         self.cityMapView.mapType = MKMapTypeStandard;
     }
 }
-//
-//- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-//    MyLocation *location = (MyLocation*)view.annotation;
-//
-//    NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving};
-//    [location.mapItem openInMapsWithLaunchOptions:launchOptions];
-//}
 
 @end
