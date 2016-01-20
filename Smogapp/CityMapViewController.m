@@ -33,8 +33,8 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     self.context = appDelegate.managedObjectContext;
-
-
+    
+    
     self.cityLabel.text = self.cityName;
     self.cityMapView.delegate = self;
     
@@ -71,16 +71,12 @@
         self.cityNameForRequest = @"zakopane";
     }
     
-    NSLog(@"%@", self.cityNameForRequest);
-    
     [self.changeMapTypeButton addTarget:self action:@selector(changeMapType:) forControlEvents:UIControlEventTouchDown];
     [self.changeMapTypeButton setTitle:@"Zmień rodzaj mapy" forState:UIControlStateNormal];
-
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
-  
-
+    
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager requestAlwaysAuthorization];
     
@@ -94,11 +90,11 @@
                 NSLog(@"%@",[self.cityLocations objectAtIndex:i]);
                 [self.parser parseStationFromLocationJSON:response];
                 [self setAnnotationsStations];
-                }];
+            }];
         }
-       
+        
     }];
-
+    
 }
 
 -(void)setAnnotationsStations{
@@ -113,7 +109,7 @@
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"city == %@", self.cityNameForRequest]];
     
     self.pointsLocations = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
-
+    
     
     if (self.pointsLocations.count >0) {
         for(Station *station in self.pointsLocations){
@@ -121,23 +117,23 @@
             longitude = station.longitude;
             description = station.locationdesc;
             parameterdescription = station.name;
-           NSLog(@"%f %f",station.lattitude.doubleValue, station.longitude.doubleValue );
+            NSLog(@"%f %f",station.lattitude.doubleValue, station.longitude.doubleValue );
         }
         
     }
     
-    
-    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-    
     CLLocationCoordinate2D pinCoordinate;
     pinCoordinate.longitude = longitude.doubleValue;
     pinCoordinate.latitude = lattitude.doubleValue;
+    
+    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
     point.coordinate = pinCoordinate;
-    point.title = [NSString stringWithFormat:@"Lokalizacja: %@", description];
-
+    point.title = [NSString stringWithFormat:@"Punkt: %@", description];
+    
     [self.cityMapView addAnnotation:point];
-        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(point.coordinate, 18000, 18000);
-        [self.cityMapView setRegion:[self.cityMapView regionThatFits:region] animated:YES];
+    
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(point.coordinate, 18000, 18000);
+    [self.cityMapView setRegion:[self.cityMapView regionThatFits:region] animated:YES];
     
 }
 
@@ -152,11 +148,10 @@
             annotationView.canShowCallout = YES;
             annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
             
-//                        annotationView.image = [UIImage imageNamed:@"arrest.png"];//here we use a nice image instead of the default pins
-        } else {
+        }
+        else {
             annotationView.annotation = annotation;
         }
-        
         return annotationView;
     }
     
@@ -187,17 +182,17 @@
     
     else if(self.cityMapView.mapType == MKMapTypeSatellite)
     {
-         self.cityMapView.mapType = MKMapTypeHybrid;
-
+        self.cityMapView.mapType = MKMapTypeHybrid;
+        
     }
     else{
         self.cityMapView.mapType = MKMapTypeStandard;
     }
 }
-        //
+//
 //- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
 //    MyLocation *location = (MyLocation*)view.annotation;
-//    
+//
 //    NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving};
 //    [location.mapItem openInMapsWithLaunchOptions:launchOptions];
 //}

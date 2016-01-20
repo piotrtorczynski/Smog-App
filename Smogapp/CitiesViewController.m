@@ -20,14 +20,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     cities = [NSArray arrayWithObjects:@"Kraków", @"Tarnów", @"Nowy Sącz", @"Olkusz", @"Skawina", @"Sucha Beskidzka", @"Szarów", @"Szymbark", @"Trzebinia", @"Zakopane", nil];
-    // Do any additional setup after loading the view, typically from a nib.
-}
+   }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
@@ -54,9 +51,7 @@
     if ([segue.identifier isEqualToString:@"showCityMap"]) {
         NSIndexPath *indexPath = [self.citiesTableView indexPathForSelectedRow];
         CityMapViewController *destViewController = segue.destinationViewController;
-        
         destViewController.cityName = [cities objectAtIndex:indexPath.row];
-        
     }
 }
 

@@ -12,21 +12,18 @@
 #import "AppDelegate.h"
 
 @interface JSONParserToCoreData()
+
 @property NSArray *citiesArrayFromRawJSON;
+
 @end
 
 @implementation JSONParserToCoreData
 
 - (instancetype)init {
     if (self = [super init]) {
-        
 
-        
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        
         self.context = appDelegate.managedObjectContext;
-        
-        
     }
     return self;
 }
@@ -45,6 +42,7 @@
         }
         returnData = [mutableJSON copy];
     }
+    
     else if([JSON isKindOfClass:[NSArray class]]){
         
         NSMutableDictionary *sanitezJSON ;
@@ -65,8 +63,7 @@
         
         NSLog(@"Error in casting response");
     }
-    
-    
+
     return returnData;
 }
 
@@ -75,14 +72,12 @@
     
     NSDictionary *sanitizedJSON = [self sanitizedDictionaryWithJSON:JSON];
     NSArray *cityLocations;
-    
-    
+
     NSSet* locations;
-    //for (id dict in sanitizedJSON){
+    
     locations = [NSSet setWithArray: [sanitizedJSON valueForKey: @"location"]];
-    NSLog(@"%@", locations);
-    //}
     cityLocations =  [locations allObjects];
+    
     return cityLocations;
     
 }
@@ -106,7 +101,8 @@
             
             if ([sanitizedJSON[@"caqidesc"] isEqualToString:@"null"]) {
                 pollution.desc = sanitizedJSON[@"aqidesc"];
-            } else {
+            }
+            else {
                 pollution.desc = sanitizedJSON[@"caqidesc"];
             }
             
@@ -120,12 +116,12 @@
             station.lattitude = [f numberFromString: sanitizedJSON[@"lat"]];
             [station addParametersObject:pollution];
         }
-        
-        
+
     }
     else if([JSON isKindOfClass:[NSArray class]]){
         
         Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:self.context];
+        
         NSMutableDictionary *dictionaryJSON ;
         NSMutableArray *mutableJSONArray = [JSON mutableCopy];
         
@@ -137,16 +133,9 @@
             station.city = dictionaryJSON[@"city"];
             station.name = dictionaryJSON[@"parameterdesc"];
             station.locationdesc = dictionaryJSON[@"locationdesc"];
-            
-         //   NSString *longString = dictionaryJSON[@"long"];
-            
             station.longitude =  [NSNumber numberWithDouble:[dictionaryJSON[@"long"] doubleValue]];
-            
-            //station.longitude = [formater numberFromString:longString];
             station.lattitude = [NSNumber numberWithDouble:[dictionaryJSON[@"lat"] doubleValue]];
-
-            
-             
+           
             for (NSString *key in dictionaryJSON.allKeys) {
                 
                 Pollution *pollution = [NSEntityDescription insertNewObjectForEntityForName:@"Pollution" inManagedObjectContext:self.context];
@@ -154,16 +143,14 @@
                 
                 if ([dictionaryJSON[@"caqidesc"] isEqualToString: @"null"]) {
                     pollution.desc = dictionaryJSON[@"aqidesc"];
-                } else {
+                }
+                else {
                     pollution.desc = dictionaryJSON[@"caqidesc"];
                 }
+                
                 pollution.name = dictionaryJSON[@"parameterdesc"];
                 pollution.value = [NSNumber numberWithDouble:[dictionaryJSON[@"long"] integerValue]];
-
-                
                 [station addParametersObject:pollution];
-                
-                
             }
             
         }
@@ -174,7 +161,5 @@
         NSLog(@"Unable to save managed object context for station.");
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
-    
-    
 }
 @end

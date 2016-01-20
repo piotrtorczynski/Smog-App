@@ -36,10 +36,8 @@ NSString * SERVICE_URL=@"http://powietrze.malopolska.pl/data/data.php";
         self.queue.maxConcurrentOperationCount = 1;
         
         sessionConfiguration.HTTPAdditionalHeaders = self.httpHeaders;
-        
         self.session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:self.queue];
-        
-        
+
     }
     
     return self;

@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-
 @interface CityMapViewController : UIViewController  <MKMapViewDelegate, CLLocationManagerDelegate>
 
 //labels
@@ -29,4 +28,5 @@
 @property(nonatomic, retain) CLLocationManager *locationManager;
 
 @property (nonatomic) NSManagedObjectContext *context;
+
 @end
