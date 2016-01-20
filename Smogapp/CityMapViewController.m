@@ -19,7 +19,7 @@
 @property NSArray *cityLocations;
 @property NSString *cityNameForRequest;
 @property NSArray *pointsLocations;
-
+@property NSString *locationName;
 @end
 
 @implementation CityMapViewController
@@ -174,9 +174,8 @@
     {
         StationResultTableViewController *destinationViewController = segue.destinationViewController;
         
-        // grab the annotation from the sender
-        
-//        destinationViewController.stationName = self.cityNameForRequest;
+      //need to send location name with seque, now its city name
+//        destinationViewController.stationName = self.locationName;
     } else {
         NSLog(@"PFS:something else");
     }

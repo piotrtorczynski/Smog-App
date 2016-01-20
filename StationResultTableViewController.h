@@ -10,4 +10,5 @@
 
 @interface StationResultTableViewController : UITableViewController
 @property NSString *stationName;
+
 @end
