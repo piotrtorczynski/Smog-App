@@ -174,15 +174,8 @@
     {
         MKPointAnnotation *point = (MKPointAnnotation*)sender;
 
-   
-        
-        
         StationResultTableViewController *destinationViewController = segue.destinationViewController;
-      //need to send location name with seque, now its city name
         CLLocation *pinCoordinate = [[CLLocation alloc]initWithLatitude:(point.coordinate.latitude) longitude:point.coordinate.longitude];
-//        pinCoordinate.longitude = point.coordinate.longitude;
-//        pinCoordinate.latitude = point.coordinate.latitude;
-        
         destinationViewController.stationLocation  = pinCoordinate;
            } else {
         NSLog(@"PFS:something else");

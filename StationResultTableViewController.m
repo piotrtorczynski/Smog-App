@@ -26,7 +26,7 @@
     self.lattitude =[ NSNumber numberWithDouble:self.stationLocation.coordinate.latitude];
     self.longitude =[NSNumber numberWithDouble:self.stationLocation.coordinate.longitude];
     NSLog(@"latlongi %@  %@", self.lattitude, self.longitude);
-
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -75,11 +75,12 @@
     NSManagedObjectContext *pollutionFetched = [self.stationPollution objectAtIndex:indexPath.row];
     
     Station *station = [self.stationPollution objectAtIndex:indexPath.row];
-//    NSLog(@"station parameters : %@", station.parameters);
-//    for (Pollution *pol in station.parameters) {
-//        pol.de
-//    }
-    [cell.textLabel setText:[pollutionFetched valueForKey:@"name"]];
+    
+    for (Pollution *pol in station.parameters) {
+        [cell.textLabel setText:[pol valueForKey:@"name"]];
+        [cell.detailTextLabel setText:[pol valueForKey:@"desc"]];
+    }
+    
     
     
     return cell;
