@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @interface StationResultTableViewController : UITableViewController
-@property NSString *stationName;
-
+@property   NSNumber *longitude;
+@property   NSNumber* lattitude;
+@property CLLocation *stationLocation;
 @end

@@ -28,12 +28,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2VA-G1-6Nx">
-                                <rect key="frame" x="0.0" y="105" width="320" height="468"/>
-                                <connections>
-                                    <outlet property="delegate" destination="nfS-6L-1Xd" id="5pr-Zn-4Qy"/>
-                                </connections>
-                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zPj-Dc-Acu">
                                 <rect key="frame" x="151" y="64" width="169" height="41"/>
                                 <color key="backgroundColor" red="0.82065091113534894" green="0.78263510256184443" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -44,6 +38,12 @@
                                     <action selector="checkJSONParsing:" destination="nfS-6L-1Xd" eventType="touchUpInside" id="hQF-0M-fSs"/>
                                 </connections>
                             </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2VA-G1-6Nx">
+                                <rect key="frame" x="0.0" y="105" width="320" height="468"/>
+                                <connections>
+                                    <outlet property="delegate" destination="nfS-6L-1Xd" id="5pr-Zn-4Qy"/>
+                                </connections>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" red="0.61504567229999996" green="0.81669728429999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
