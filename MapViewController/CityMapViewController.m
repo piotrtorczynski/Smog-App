@@ -161,8 +161,8 @@
 {
     if (![view.annotation isKindOfClass:[MKPointAnnotation class]])
         return;
-          [self performSegueWithIdentifier:@"pushDBResults" sender:view.annotation];
-   
+    [self performSegueWithIdentifier:@"pushDBResults" sender:view.annotation];
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -170,11 +170,11 @@
     if ([segue.identifier isEqualToString:@"pushDBResults"])
     {
         MKPointAnnotation *point = (MKPointAnnotation*)sender;
-
+        
         StationResultTableViewController *destinationViewController = segue.destinationViewController;
         CLLocation *pinCoordinate = [[CLLocation alloc]initWithLatitude:(point.coordinate.latitude) longitude:point.coordinate.longitude];
         destinationViewController.stationLocation  = pinCoordinate;
-           } else {
+    } else {
         NSLog(@"PFS:something else");
     }
 }

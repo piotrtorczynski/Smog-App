@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class Station;
+
 @interface PollutionFromStationViewController : UITableViewController
 @property (strong, nonatomic) IBOutlet UITableView *stationTableView;
 @property NSNumber *tableViewTimeStamp;
 @property (nonatomic) NSManagedObjectContext *context;
 @property NSNumber *longitude;
 @property NSNumber *lattitude;
+
+@property Station *selectedStation;
 
 @end

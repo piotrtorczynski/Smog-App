@@ -12,10 +12,10 @@
 #import "Pollution+CoreDataProperties.h"
 #import "PollutionFromStationViewController.h"
 
+
 @interface StationResultTableViewController ()
 @property NSArray *stationPollution;
 @property NSNumber *resultTimeStamp;
-
 @end
 
 @implementation StationResultTableViewController
@@ -35,15 +35,6 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
     
     
     NSPredicate *longitudePredicate = [NSPredicate predicateWithFormat:@"lattitude == %@",self.lattitude];
@@ -55,10 +46,12 @@
     
     self.stationPollution = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
     [self.resultTableView reloadData];
-    
 }
 
-#pragma mark - Table view data source
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
@@ -94,12 +87,27 @@
 
         PollutionFromStationViewController *destinationViewController = segue.destinationViewController;
 
+        NSIndexPath *selectedIndex = (NSIndexPath*)sender;
+        
+        Station *selectedStation = [self.stationPollution objectAtIndex:selectedIndex.row];
+        
+        NSLog(@"selectedStation.parameters.count %u",selectedStation.parameters.count);
+        
         destinationViewController.tableViewTimeStamp  = self.resultTimeStamp;
         destinationViewController.lattitude = self.lattitude;
         destinationViewController.longitude = self.longitude;
+        destinationViewController.selectedStation = selectedStation;
+        
+        
     } else {
         NSLog(@"PFS:something else");
     }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self performSegueWithIdentifier:@"showResultForSpecificTime" sender:indexPath];
+    
 }
 
 -(NSString *)parseTimeStampToDate:(NSNumber *)timestamp{

@@ -12,8 +12,8 @@
 #import "Station+CoreDataProperties.h"
 
 @interface PollutionFromStationViewController ()
-@property NSArray *pollutionForStationArray;
-
+@property NSArray *stationsArray;
+@property NSArray *pollutionsArray;
 @end
 
 @implementation PollutionFromStationViewController
@@ -27,27 +27,13 @@
     self.context = appDelegate.managedObjectContext;
     
     
+      NSPredicate *timeStampPredicate = [NSPredicate predicateWithFormat:@"timestamp == %@",self.tableViewTimeStamp];
+    
+    NSArray *allObj =[self.selectedStation.parameters allObjects];
+    self.pollutionsArray = [self.selectedStation.parameters.allObjects filteredArrayUsingPredicate:timeStampPredicate];
+    
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    
-    [super viewDidAppear:animated];
-    
-    
-    NSPredicate *longitudePredicate = [NSPredicate predicateWithFormat:@"lattitude == %@",self.lattitude];
-    NSPredicate *lattitudePredicate = [NSPredicate predicateWithFormat:@"longitude == %@",self.longitude];
-//    NSPredicate *timeStampPredicate = [NSPredicate predicateWithFormat:@"timestamp == %@",self.tableViewTimeStamp];
-    
-    NSPredicate *fetchPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[lattitudePredicate, longitudePredicate]];
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Station"];
-    [fetchRequest setPredicate:fetchPredicate];
-    
-    self.pollutionForStationArray = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    [self.stationTableView reloadData];
-    
-    
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -60,26 +46,19 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.pollutionForStationArray.count;
+    return self.pollutionsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pollutionCell" forIndexPath:indexPath];
     
-   Station *station = [self.pollutionForStationArray objectAtIndex:indexPath.row];
 
-    for (Pollution *pollution in station.parameters){
-        if ([pollution.timestamp isEqual: self.tableViewTimeStamp]) {
+   Pollution *pollution = [ self.pollutionsArray objectAtIndex:indexPath.row];
+   
             [cell.textLabel setText:pollution.name];
             [cell.detailTextLabel setText:pollution.desc];
-        }
-        else{
-            NSLog(@"Probleeeeem");
-        }
-    }
     
-    
-    return cell;
+         return cell;
 }
 
 

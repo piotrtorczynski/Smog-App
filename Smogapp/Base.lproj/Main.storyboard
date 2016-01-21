@@ -113,9 +113,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="eam-9T-6ff" kind="push" identifier="showResultForSpecificTime" id="bMc-EW-bqG"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -130,6 +127,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="resultTableView" destination="ApM-jt-3Ae" id="sEj-BU-YvL"/>
+                        <segue destination="eam-9T-6ff" kind="push" identifier="showResultForSpecificTime" id="mI0-4p-y0g"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bv5-CJ-eHB" userLabel="First Responder" sceneMemberID="firstResponder"/>
