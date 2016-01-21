@@ -7,16 +7,27 @@
 //
 
 #import "StationResultTableViewController.h"
+#import "AppDelegate.h"
+#import "Station+CoreDataProperties.h"
+#import "Pollution+CoreDataProperties.h"
 
 @interface StationResultTableViewController ()
-
+@property NSArray *stationPollution;
 @end
 
 @implementation StationResultTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    NSLog(@"latlongi %f  %f", self.stationLocation.coordinate.latitude, self.stationLocation.coordinate.longitude);
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    self.context = appDelegate.managedObjectContext;
+    self.lattitude =[ NSNumber numberWithDouble:self.stationLocation.coordinate.latitude];
+    self.longitude =[NSNumber numberWithDouble:self.stationLocation.coordinate.longitude];
+    NSLog(@"latlongi %@  %@", self.lattitude, self.longitude);
+
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -29,27 +40,51 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    
+    NSPredicate *longitudePredicate = [NSPredicate predicateWithFormat:@"lattitude == %@",self.lattitude];
+    NSPredicate *lattitudePredicate = [NSPredicate predicateWithFormat:@"longitude == %@",self.longitude];
+    NSPredicate *fetchPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[lattitudePredicate, longitudePredicate]];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Station"];
+    [fetchRequest setPredicate:fetchPredicate];
+    
+    self.stationPollution = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    [self.resultTableView reloadData];
+    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    
+    return self.stationPollution.count;
 }
 
-/*
- - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
- UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
- 
- // Configure the cell...
- 
- return cell;
- }
- */
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"resultTableCell" forIndexPath:indexPath];
+    
+    NSManagedObjectContext *pollutionFetched = [self.stationPollution objectAtIndex:indexPath.row];
+    
+    Station *station = [self.stationPollution objectAtIndex:indexPath.row];
+//    NSLog(@"station parameters : %@", station.parameters);
+//    for (Pollution *pol in station.parameters) {
+//        pol.de
+//    }
+    [cell.textLabel setText:[pollutionFetched valueForKey:@"name"]];
+    
+    
+    return cell;
+}
+
 
 /*
  // Override to support conditional editing of the table view.

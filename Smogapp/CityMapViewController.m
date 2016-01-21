@@ -90,7 +90,7 @@
             [downloader getAllParametersFromCityAndLocation:self.cityNameForRequest location:[self.cityLocations objectAtIndex:i] callback:^(BOOL parseSuccess, id response, NSError *connectionError) {
                 NSLog(@"%@",[self.cityLocations objectAtIndex:i]);
                 [self.parser parseStationFromLocationJSON:response];
-                [self setAnnotationsStations];
+                [self setAnnotationsStationsWithLocation:[self.cityLocations objectAtIndex:i]];
             }];
         }
         
@@ -98,7 +98,7 @@
     
 }
 
--(void)setAnnotationsStations{
+-(void)setAnnotationsStationsWithLocation:(NSArray*)location{
     
     NSNumber *lattitude = [[NSNumber alloc]init];
     NSNumber *longitude = [[NSNumber alloc]init];
@@ -107,8 +107,8 @@
     NSString *parameterdescription;
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Station"];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"city == %@", self.cityNameForRequest]];
-    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"location == %@", location]];
+    [fetchRequest setFetchLimit:1];
     self.pointsLocations = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     

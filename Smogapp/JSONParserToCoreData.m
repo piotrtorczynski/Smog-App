@@ -21,7 +21,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-
+        
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         self.context = appDelegate.managedObjectContext;
     }
@@ -63,7 +63,7 @@
         
         NSLog(@"Error in casting response");
     }
-
+    
     return returnData;
 }
 
@@ -72,7 +72,7 @@
     
     NSDictionary *sanitizedJSON = [self sanitizedDictionaryWithJSON:JSON];
     NSArray *cityLocations;
-
+    
     NSSet* locations;
     
     locations = [NSSet setWithArray: [sanitizedJSON valueForKey: @"location"]];
@@ -111,12 +111,13 @@
             
             station.city = sanitizedJSON[@"city"];
             station.name = sanitizedJSON[@"parameterdesc"];
+            station.location = sanitizedJSON[@"location"];
             station.locationdesc = sanitizedJSON[@"locationdesc"];
             station.longitude = [f numberFromString: sanitizedJSON[@"long"]];
             station.lattitude = [f numberFromString: sanitizedJSON[@"lat"]];
             [station addParametersObject:pollution];
         }
-
+        
     }
     else if([JSON isKindOfClass:[NSArray class]]){
         
@@ -135,7 +136,8 @@
             station.locationdesc = dictionaryJSON[@"locationdesc"];
             station.longitude =  [NSNumber numberWithDouble:[dictionaryJSON[@"long"] doubleValue]];
             station.lattitude = [NSNumber numberWithDouble:[dictionaryJSON[@"lat"] doubleValue]];
-           
+            station.location = dictionaryJSON[@"location"];
+            
             for (NSString *key in dictionaryJSON.allKeys) {
                 
                 Pollution *pollution = [NSEntityDescription insertNewObjectForEntityForName:@"Pollution" inManagedObjectContext:self.context];
