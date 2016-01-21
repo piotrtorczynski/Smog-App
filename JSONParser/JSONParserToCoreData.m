@@ -128,38 +128,37 @@
         
         NSMutableDictionary *dictionaryJSON ;
         NSMutableArray *mutableJSONArray = [JSON mutableCopy];
-        
+        NSDictionary *firsDictionary = [mutableJSONArray objectAtIndex:1];
         NSNumberFormatter *formater = [[NSNumberFormatter alloc] init];
         formater.numberStyle = NSNumberFormatterCurrencyStyle;
         
+        
+        station.city = firsDictionary[@"city"] ;
+        station.name = firsDictionary[@"parameterdesc"];
+        station.locationdesc = firsDictionary[@"locationdesc"];
+        station.longitude =  [NSNumber numberWithDouble:[firsDictionary[@"long"] doubleValue]];
+        station.lattitude = [NSNumber numberWithDouble:[firsDictionary[@"lat"] doubleValue]];
+        station.location = firsDictionary[@"location"];
+        station.timestamp = [NSNumber numberWithInt:[firsDictionary[@"timestamp"]integerValue]];
+        
         for (dictionaryJSON in mutableJSONArray) {
+            Pollution *pollution = [NSEntityDescription insertNewObjectForEntityForName:@"Pollution" inManagedObjectContext:self.context];
             
-            station.city = dictionaryJSON[@"city"];
-            station.name = dictionaryJSON[@"parameterdesc"];
-            station.locationdesc = dictionaryJSON[@"locationdesc"];
-            station.longitude =  [NSNumber numberWithDouble:[dictionaryJSON[@"long"] doubleValue]];
-            station.lattitude = [NSNumber numberWithDouble:[dictionaryJSON[@"lat"] doubleValue]];
-            station.location = dictionaryJSON[@"location"];
-            station.timestamp = [NSNumber numberWithInt:[dictionaryJSON[@"timestamp"]integerValue]];
+            pollution.date = dictionaryJSON[@"date"];
             
-            for (NSString *key in dictionaryJSON.allKeys) {
-                
-                Pollution *pollution = [NSEntityDescription insertNewObjectForEntityForName:@"Pollution" inManagedObjectContext:self.context];
-                pollution.date = dictionaryJSON[@"date"];
-                
-                if ([dictionaryJSON[@"caqidesc"] isEqualToString: @"null"]) {
-                    pollution.desc = dictionaryJSON[@"aqidesc"];
-                }
-                else {
-                    pollution.desc = dictionaryJSON[@"caqidesc"];
-                }
-                pollution.timestamp = [NSNumber numberWithInt:[dictionaryJSON[@"timestamp"]integerValue]];
-                pollution.name = dictionaryJSON[@"parameterdesc"];
-                pollution.value = [NSNumber numberWithDouble:[dictionaryJSON[@"long"] integerValue]];
-                [station addParametersObject:pollution];
+            if ([dictionaryJSON[@"caqidesc"] isEqualToString: @"null"]) {
+                pollution.desc = dictionaryJSON[@"aqidesc"];
             }
+            else {
+                pollution.desc = dictionaryJSON[@"caqidesc"];
+            }
+            pollution.timestamp = [NSNumber numberWithInt:[dictionaryJSON[@"timestamp"]integerValue]];
+            pollution.name = dictionaryJSON[@"parameterdesc"];
+            pollution.value = [NSNumber numberWithDouble:[dictionaryJSON[@"long"] integerValue]];
             
+            [station addParametersObject:pollution];
         }
+        
         
     }
     
