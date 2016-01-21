@@ -24,9 +24,6 @@
 
 @implementation CityMapViewController
 
-
-
-
 - (void)viewDidLoad {
     
     [super viewDidLoad];

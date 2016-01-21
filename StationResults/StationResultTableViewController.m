@@ -25,7 +25,6 @@
     self.context = appDelegate.managedObjectContext;
     self.lattitude =[ NSNumber numberWithDouble:self.stationLocation.coordinate.latitude];
     self.longitude =[NSNumber numberWithDouble:self.stationLocation.coordinate.longitude];
-    NSLog(@"latlongi %@  %@", self.lattitude, self.longitude);
     
     
     // Uncomment the following line to preserve selection between presentations.
