@@ -18,8 +18,8 @@
 @dynamic locationdesc;
 @dynamic longitude;
 @dynamic name;
-@dynamic parameter;
 @dynamic location;
+@dynamic timestamp;
 @dynamic parameters;
 
 @end

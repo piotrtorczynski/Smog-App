@@ -108,13 +108,16 @@
             
             pollution.name = sanitizedJSON[@"parameterdesc"];
             pollution.value = sanitizedJSON[@"value"];
+            pollution.timestamp = sanitizedJSON[@"timestamp"];
             
             station.city = sanitizedJSON[@"city"];
             station.name = sanitizedJSON[@"parameterdesc"];
             station.location = sanitizedJSON[@"location"];
             station.locationdesc = sanitizedJSON[@"locationdesc"];
+            station.timestamp = [NSNumber numberWithInt:[sanitizedJSON[@"timestamp"]integerValue]];
             station.longitude = [f numberFromString: sanitizedJSON[@"long"]];
             station.lattitude = [f numberFromString: sanitizedJSON[@"lat"]];
+            
             [station addParametersObject:pollution];
         }
         
@@ -137,6 +140,7 @@
             station.longitude =  [NSNumber numberWithDouble:[dictionaryJSON[@"long"] doubleValue]];
             station.lattitude = [NSNumber numberWithDouble:[dictionaryJSON[@"lat"] doubleValue]];
             station.location = dictionaryJSON[@"location"];
+            station.timestamp = [NSNumber numberWithInt:[dictionaryJSON[@"timestamp"]integerValue]];
             
             for (NSString *key in dictionaryJSON.allKeys) {
                 
@@ -149,7 +153,7 @@
                 else {
                     pollution.desc = dictionaryJSON[@"caqidesc"];
                 }
-                
+                pollution.timestamp = [NSNumber numberWithInt:[dictionaryJSON[@"timestamp"]integerValue]];
                 pollution.name = dictionaryJSON[@"parameterdesc"];
                 pollution.value = [NSNumber numberWithDouble:[dictionaryJSON[@"long"] integerValue]];
                 [station addParametersObject:pollution];

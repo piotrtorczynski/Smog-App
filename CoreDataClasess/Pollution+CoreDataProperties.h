@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *desc;
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSNumber *value;
+@property (nullable, nonatomic, retain) NSString *unit;
+@property (nullable, nonatomic, retain) NSNumber *timestamp;
 @property (nullable, nonatomic, retain) Station *station;
 
 @end

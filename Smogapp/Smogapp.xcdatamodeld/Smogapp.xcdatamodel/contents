@@ -4,7 +4,9 @@
         <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="value" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="unit" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="station" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Station" inverseName="parameters" inverseEntity="Station" syncable="YES"/>
     </entity>
     <entity name="Station" representedClassName="Station" syncable="YES">
@@ -14,11 +16,11 @@
         <attribute name="locationdesc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="parameter" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="parameters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pollution" inverseName="station" inverseEntity="Pollution" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Pollution" positionX="-441" positionY="-9" width="128" height="118"/>
+        <element name="Pollution" positionX="-441" positionY="-9" width="128" height="148"/>
         <element name="Station" positionX="-918" positionY="-121" width="128" height="163"/>
     </elements>
 </model>

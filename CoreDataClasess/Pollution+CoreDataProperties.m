@@ -17,6 +17,8 @@
 @dynamic desc;
 @dynamic name;
 @dynamic value;
+@dynamic unit;
+@dynamic timestamp;
 @dynamic station;
 
 @end

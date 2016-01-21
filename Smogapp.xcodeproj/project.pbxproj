@@ -20,10 +20,11 @@
 		D273E2081C50E86D008949F1 /* CitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D273E2071C50E86D008949F1 /* CitiesViewController.m */; };
 		D273E20C1C50E875008949F1 /* JSONParserToCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = D273E20B1C50E875008949F1 /* JSONParserToCoreData.m */; };
 		D273E2101C50E87B008949F1 /* JSONDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = D273E20F1C50E87B008949F1 /* JSONDownloader.m */; };
-		D273E21A1C50E884008949F1 /* Pollution+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D273E2131C50E884008949F1 /* Pollution+CoreDataProperties.m */; };
-		D273E21B1C50E884008949F1 /* Pollution.m in Sources */ = {isa = PBXBuildFile; fileRef = D273E2151C50E884008949F1 /* Pollution.m */; };
-		D273E21C1C50E884008949F1 /* Station+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D273E2171C50E884008949F1 /* Station+CoreDataProperties.m */; };
-		D273E21D1C50E884008949F1 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = D273E2191C50E884008949F1 /* Station.m */; };
+		D273E2231C50F9FC008949F1 /* PollutionFromStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D273E2221C50F9FC008949F1 /* PollutionFromStationViewController.m */; };
+		D273E2381C510993008949F1 /* Station+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D273E2311C510993008949F1 /* Station+CoreDataProperties.m */; };
+		D273E2391C510993008949F1 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = D273E2331C510993008949F1 /* Station.m */; };
+		D273E23A1C510993008949F1 /* Pollution+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D273E2351C510993008949F1 /* Pollution+CoreDataProperties.m */; };
+		D273E23B1C510993008949F1 /* Pollution.m in Sources */ = {isa = PBXBuildFile; fileRef = D273E2371C510993008949F1 /* Pollution.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,14 +49,16 @@
 		D273E20B1C50E875008949F1 /* JSONParserToCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONParserToCoreData.m; sourceTree = "<group>"; };
 		D273E20E1C50E87B008949F1 /* JSONDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONDownloader.h; sourceTree = "<group>"; };
 		D273E20F1C50E87B008949F1 /* JSONDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONDownloader.m; sourceTree = "<group>"; };
-		D273E2121C50E884008949F1 /* Pollution+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pollution+CoreDataProperties.h"; sourceTree = "<group>"; };
-		D273E2131C50E884008949F1 /* Pollution+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Pollution+CoreDataProperties.m"; sourceTree = "<group>"; };
-		D273E2141C50E884008949F1 /* Pollution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pollution.h; sourceTree = "<group>"; };
-		D273E2151C50E884008949F1 /* Pollution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pollution.m; sourceTree = "<group>"; };
-		D273E2161C50E884008949F1 /* Station+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Station+CoreDataProperties.h"; sourceTree = "<group>"; };
-		D273E2171C50E884008949F1 /* Station+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Station+CoreDataProperties.m"; sourceTree = "<group>"; };
-		D273E2181C50E884008949F1 /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Station.h; sourceTree = "<group>"; };
-		D273E2191C50E884008949F1 /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Station.m; sourceTree = "<group>"; };
+		D273E2211C50F9FC008949F1 /* PollutionFromStationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PollutionFromStationViewController.h; path = PollutionFromStationViewController/PollutionFromStationViewController.h; sourceTree = "<group>"; };
+		D273E2221C50F9FC008949F1 /* PollutionFromStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PollutionFromStationViewController.m; path = PollutionFromStationViewController/PollutionFromStationViewController.m; sourceTree = "<group>"; };
+		D273E2301C510993008949F1 /* Station+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Station+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D273E2311C510993008949F1 /* Station+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Station+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D273E2321C510993008949F1 /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Station.h; sourceTree = "<group>"; };
+		D273E2331C510993008949F1 /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Station.m; sourceTree = "<group>"; };
+		D273E2341C510993008949F1 /* Pollution+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pollution+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D273E2351C510993008949F1 /* Pollution+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Pollution+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D273E2361C510993008949F1 /* Pollution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pollution.h; sourceTree = "<group>"; };
+		D273E2371C510993008949F1 /* Pollution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pollution.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +83,7 @@
 				D273E2051C50E86D008949F1 /* CitiesViewController */,
 				D273E2011C50E863008949F1 /* MapViewController */,
 				D273E1FD1C50E852008949F1 /* StationResults */,
+				D273E2201C50F9E8008949F1 /* PollutionFromStationViewController */,
 				D203635E1C3FF068002664D0 /* Smogapp */,
 				D203635D1C3FF068002664D0 /* Products */,
 			);
@@ -166,16 +170,25 @@
 		D273E2111C50E884008949F1 /* CoreDataClasess */ = {
 			isa = PBXGroup;
 			children = (
-				D273E2121C50E884008949F1 /* Pollution+CoreDataProperties.h */,
-				D273E2131C50E884008949F1 /* Pollution+CoreDataProperties.m */,
-				D273E2141C50E884008949F1 /* Pollution.h */,
-				D273E2151C50E884008949F1 /* Pollution.m */,
-				D273E2161C50E884008949F1 /* Station+CoreDataProperties.h */,
-				D273E2171C50E884008949F1 /* Station+CoreDataProperties.m */,
-				D273E2181C50E884008949F1 /* Station.h */,
-				D273E2191C50E884008949F1 /* Station.m */,
+				D273E2301C510993008949F1 /* Station+CoreDataProperties.h */,
+				D273E2311C510993008949F1 /* Station+CoreDataProperties.m */,
+				D273E2321C510993008949F1 /* Station.h */,
+				D273E2331C510993008949F1 /* Station.m */,
+				D273E2341C510993008949F1 /* Pollution+CoreDataProperties.h */,
+				D273E2351C510993008949F1 /* Pollution+CoreDataProperties.m */,
+				D273E2361C510993008949F1 /* Pollution.h */,
+				D273E2371C510993008949F1 /* Pollution.m */,
 			);
 			path = CoreDataClasess;
+			sourceTree = "<group>";
+		};
+		D273E2201C50F9E8008949F1 /* PollutionFromStationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D273E2211C50F9FC008949F1 /* PollutionFromStationViewController.h */,
+				D273E2221C50F9FC008949F1 /* PollutionFromStationViewController.m */,
+			);
+			name = PollutionFromStationViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,16 +263,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				D20363641C3FF068002664D0 /* AppDelegate.m in Sources */,
-				D273E21A1C50E884008949F1 /* Pollution+CoreDataProperties.m in Sources */,
-				D273E21D1C50E884008949F1 /* Station.m in Sources */,
-				D273E21B1C50E884008949F1 /* Pollution.m in Sources */,
 				D273E2081C50E86D008949F1 /* CitiesViewController.m in Sources */,
+				D273E2391C510993008949F1 /* Station.m in Sources */,
+				D273E23B1C510993008949F1 /* Pollution.m in Sources */,
 				D273E20C1C50E875008949F1 /* JSONParserToCoreData.m in Sources */,
 				D273E2041C50E863008949F1 /* CityMapViewController.m in Sources */,
 				D273E2101C50E87B008949F1 /* JSONDownloader.m in Sources */,
-				D273E21C1C50E884008949F1 /* Station+CoreDataProperties.m in Sources */,
 				D273E2001C50E852008949F1 /* StationResultTableViewController.m in Sources */,
+				D273E2381C510993008949F1 /* Station+CoreDataProperties.m in Sources */,
+				D273E2231C50F9FC008949F1 /* PollutionFromStationViewController.m in Sources */,
 				D20363611C3FF068002664D0 /* main.m in Sources */,
+				D273E23A1C510993008949F1 /* Pollution+CoreDataProperties.m in Sources */,
 				D203636D1C3FF068002664D0 /* Smogapp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

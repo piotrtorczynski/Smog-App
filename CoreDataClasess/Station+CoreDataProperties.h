@@ -20,8 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *locationdesc;
 @property (nullable, nonatomic, retain) NSNumber *longitude;
 @property (nullable, nonatomic, retain) NSString *name;
-@property (nullable, nonatomic, retain) NSString *parameter;
 @property (nullable, nonatomic, retain) NSString *location;
+@property (nullable, nonatomic, retain) NSNumber *timestamp;
 @property (nullable, nonatomic, retain) NSSet<Pollution *> *parameters;
 
 @end

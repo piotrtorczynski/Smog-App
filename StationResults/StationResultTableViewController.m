@@ -10,9 +10,12 @@
 #import "AppDelegate.h"
 #import "Station+CoreDataProperties.h"
 #import "Pollution+CoreDataProperties.h"
+#import "PollutionFromStationViewController.h"
 
 @interface StationResultTableViewController ()
 @property NSArray *stationPollution;
+@property NSNumber *resultTimeStamp;
+
 @end
 
 @implementation StationResultTableViewController
@@ -59,10 +62,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 1;
+   return  1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     
     return self.stationPollution.count;
 }
@@ -71,63 +75,45 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"resultTableCell" forIndexPath:indexPath];
     
-    NSManagedObjectContext *pollutionFetched = [self.stationPollution objectAtIndex:indexPath.row];
     
     Station *station = [self.stationPollution objectAtIndex:indexPath.row];
+    self.resultTimeStamp =station.timestamp;
     
-    for (Pollution *pol in station.parameters) {
-        [cell.textLabel setText:[pol valueForKey:@"name"]];
-        [cell.detailTextLabel setText:[pol valueForKey:@"desc"]];
-    }
-    
-    
-    
-    return cell;
+        [cell.textLabel setText:[self parseTimeStampToDate:station.timestamp]];
+        [cell.detailTextLabel setText:@""];
+
+     return cell;
+  
 }
 
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showResultForSpecificTime"])
+    {
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
+        PollutionFromStationViewController *destinationViewController = segue.destinationViewController;
 
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
+        destinationViewController.tableViewTimeStamp  = self.resultTimeStamp;
+        destinationViewController.lattitude = self.lattitude;
+        destinationViewController.longitude = self.longitude;
+    } else {
+        NSLog(@"PFS:something else");
+    }
+}
 
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
+-(NSString *)parseTimeStampToDate:(NSNumber *)timestamp{
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+    double unixTimeStamp = [timestamp doubleValue];
+    NSTimeInterval _interval=unixTimeStamp;
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
+    NSDateFormatter *_formatter=[[NSDateFormatter alloc]init];
+    [_formatter setLocale:[NSLocale currentLocale]];
+    [_formatter setDateFormat:@"dd.MM.yyyy HH:mm"];
+    NSString *_date=[_formatter stringFromDate:date];
+
+    return _date;
+}
+
 
 @end
