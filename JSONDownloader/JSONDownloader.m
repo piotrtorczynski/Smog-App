@@ -42,27 +42,10 @@ NSString * SERVICE_URL=@"http://powietrze.malopolska.pl/data/data.php";
     
     return self;
 }
-- (void)getAllCitiesFromCallback :(JSONDownloaderCompletionBlock)callback{
-    [self getServerResponeFor:[NSString stringWithFormat:@"type=lastmeasurement"] withResults:callback];
-}
 
 - (void)getAllInformationFromCity:(NSString*)city callback:(JSONDownloaderCompletionBlock)callback{
-    [self getServerResponeFor:[NSString stringWithFormat:@"type=smartmeasurement&city=%@", city] withResults:callback];
-}
-
-- (void)getAllInformationFromCityAndLocation:(NSString*)city location:(NSString *)location callback:(JSONDownloaderCompletionBlock)callback{
-    [self getServerResponeFor:[NSString stringWithFormat:@"type=measurement&city=%@&location=%@", city,location] withResults:callback];
-}
-
-
-- (void)getParameterFromCityAndLocation: (NSString*) city location:(NSString *)location parameterType:(NSString*)parameterType callback:(JSONDownloaderCompletionBlock)callback{
-    [self getServerResponeFor:[NSString stringWithFormat:@"type=lastmeasurement&city=%@&location=%@&parameter=%@", city,location, parameterType] withResults:callback];
-}
-
-- (void)getLastInformationFromCity: (NSString*) city :(JSONDownloaderCompletionBlock)callback{
     [self getServerResponeFor:[NSString stringWithFormat:@"type=lastmeasurement&city=%@", city] withResults:callback];
 }
-
 - (void)getAllParametersFromCityAndLocation:(NSString*)city location:(NSString *)location callback:(JSONDownloaderCompletionBlock)callback{
     [self getServerResponeFor:[NSString stringWithFormat:@"type=smartmeasurement&city=%@&location=%@", city,location] withResults:callback];
 }

@@ -154,7 +154,7 @@
             }
             pollution.timestamp = [NSNumber numberWithInt:[dictionaryJSON[@"timestamp"]integerValue]];
             pollution.name = dictionaryJSON[@"parameterdesc"];
-            pollution.value = [NSNumber numberWithDouble:[dictionaryJSON[@"long"] integerValue]];
+            pollution.value = [NSNumber numberWithDouble:[dictionaryJSON[@"value"] integerValue]];
             pollution.unit = dictionaryJSON[@"unit"];
             [station addParametersObject:pollution];
         }

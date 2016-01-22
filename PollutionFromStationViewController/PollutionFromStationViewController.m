@@ -27,8 +27,17 @@
     
     self.context = appDelegate.managedObjectContext;
     
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
+                                                 ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    
+    
     NSPredicate *timeStampPredicate = [NSPredicate predicateWithFormat:@"timestamp == %@",self.tableViewTimeStamp];
     self.pollutionsArray = [self.selectedStation.parameters.allObjects filteredArrayUsingPredicate:timeStampPredicate];
+    self.pollutionsArray = [self.pollutionsArray sortedArrayUsingDescriptors:sortDescriptors];
+    UIEdgeInsets inset = UIEdgeInsetsMake(5, 0, 0, 0);
+    self.tableView.contentInset = inset;
     
 }
 
@@ -58,6 +67,26 @@
     [cell.parameterValueLabel setText:pollution.value.stringValue];
     [cell.parameterUnitLabel setText:pollution.unit];
     [cell.parameterDescLabel setText:pollution.desc];
+        if ([cell.parameterDescLabel.text isEqual:@""]) {
+            cell.backgroundColor = [UIColor blackColor];
+        }
+        else if ([cell.parameterDescLabel.text isEqual:@"bardzo niski"]){
+         cell.backgroundColor = [UIColor greenColor];
+        }
+        else if ([cell.parameterDescLabel.text isEqual:@"niski"]){
+            cell.backgroundColor = [UIColor greenColor];
+        }
+        else if ([cell.parameterDescLabel.text isEqual:@"średni"]){
+            cell.backgroundColor = [UIColor yellowColor];
+        }
+        else if ([cell.parameterDescLabel.text isEqual:@"wysoki"]){
+            cell.backgroundColor = [UIColor redColor];
+        }
+        else if ([cell.parameterDescLabel.text isEqual:@"bardzo wysoki"]){
+            cell.backgroundColor = [UIColor greenColor];
+        }
+    
+    [cell.parameterDescLabel setText:[NSString stringWithFormat:@"Stan: %@",pollution.desc]];
 
     return cell;
 }
