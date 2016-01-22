@@ -67,8 +67,8 @@
     [cell.parameterValueLabel setText:pollution.value.stringValue];
     [cell.parameterUnitLabel setText:pollution.unit];
     [cell.parameterDescLabel setText:pollution.desc];
-        if ([cell.parameterDescLabel.text isEqual:@""]) {
-            cell.backgroundColor = [UIColor blackColor];
+        if ([cell.parameterDescLabel.text isEqual: nil]) {
+            cell.backgroundColor = [UIColor blueColor];
         }
         else if ([cell.parameterDescLabel.text isEqual:@"bardzo niski"]){
          cell.backgroundColor = [UIColor greenColor];
