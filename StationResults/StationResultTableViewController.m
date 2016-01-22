@@ -29,21 +29,14 @@
     self.lattitude =[ NSNumber numberWithDouble:self.stationLocation.coordinate.latitude];
     self.longitude =[NSNumber numberWithDouble:self.stationLocation.coordinate.longitude];
     
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    
     NSPredicate *longitudePredicate = [NSPredicate predicateWithFormat:@"lattitude == %@",self.lattitude];
     NSPredicate *lattitudePredicate = [NSPredicate predicateWithFormat:@"longitude == %@",self.longitude];
     NSPredicate *fetchPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[lattitudePredicate, longitudePredicate]];
-    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Station"];
     [fetchRequest setPredicate:fetchPredicate];
-    
+   
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
     self.stationPollution = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
     [self.resultTableView reloadData];
 }
