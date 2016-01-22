@@ -85,6 +85,25 @@
         else if ([cell.parameterDescLabel.text isEqual:@"bardzo wysoki"]){
             cell.backgroundColor = [UIColor redColor];
         }
+        else if ([cell.parameterDescLabel.text isEqual:@"dobry"]){
+            cell.backgroundColor = [UIColor greenColor];
+        }
+        else if ([cell.parameterDescLabel.text isEqual:@"umiarkowany"]){
+            cell.backgroundColor = [UIColor yellowColor];
+        }
+        else if ([cell.parameterDescLabel.text isEqual:@"niezdrowy dla grup wrażliwych"]){
+            cell.backgroundColor = [UIColor yellowColor];
+        }
+        else if ([cell.parameterDescLabel.text isEqual:@"niezdrowy"]){
+            cell.backgroundColor = [UIColor redColor];
+        }
+        else if ([cell.parameterDescLabel.text isEqual:@"bardzo niezdrowy"]){
+            cell.backgroundColor = [UIColor redColor];
+        }
+        else if ([cell.parameterDescLabel.text isEqual:@"niebezpieczny"]){
+            cell.backgroundColor = [UIColor redColor];
+        }
+    
     
     [cell.parameterDescLabel setText:[NSString stringWithFormat:@"Poziom: %@",pollution.desc]];
 

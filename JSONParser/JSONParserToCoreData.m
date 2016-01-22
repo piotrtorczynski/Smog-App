@@ -99,7 +99,7 @@
         for (NSString *key in mutableJSON.allKeys) {
             pollution.date = sanitizedJSON[@"date"];
             
-            if ([sanitizedJSON[@"caqidesc"] isEqualToString:@"null"]) {
+            if (sanitizedJSON[@"caqidesc"] == nil) {
                 pollution.desc = sanitizedJSON[@"aqidesc"];
             }
             else {
@@ -146,7 +146,7 @@
             
             pollution.date = dictionaryJSON[@"date"];
             
-            if ([dictionaryJSON[@"caqidesc"] isEqualToString: @"null"]) {
+            if (dictionaryJSON[@"caqidesc"] == nil) {
                 pollution.desc = dictionaryJSON[@"aqidesc"];
             }
             else {
