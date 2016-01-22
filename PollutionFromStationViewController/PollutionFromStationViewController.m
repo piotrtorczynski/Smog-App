@@ -83,7 +83,7 @@
             cell.backgroundColor = [UIColor redColor];
         }
         else if ([cell.parameterDescLabel.text isEqual:@"bardzo wysoki"]){
-            cell.backgroundColor = [UIColor greenColor];
+            cell.backgroundColor = [UIColor redColor];
         }
     
     [cell.parameterDescLabel setText:[NSString stringWithFormat:@"Poziom: %@",pollution.desc]];
