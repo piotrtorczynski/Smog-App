@@ -110,7 +110,7 @@
             pollution.value = sanitizedJSON[@"value"];
             pollution.timestamp = sanitizedJSON[@"timestamp"];
             pollution.unit = sanitizedJSON[@"unit"];
-            station.city = sanitizedJSON[@"city"];
+           
             station.name = sanitizedJSON[@"parameterdesc"];
             station.location = sanitizedJSON[@"location"];
             station.locationdesc = sanitizedJSON[@"locationdesc"];
@@ -133,7 +133,7 @@
         formater.numberStyle = NSNumberFormatterCurrencyStyle;
         
         
-        station.city = firsDictionary[@"city"] ;
+//        station.city = firsDictionary[@"city"] ;
         station.name = firsDictionary[@"parameterdesc"];
         station.locationdesc = firsDictionary[@"locationdesc"];
         station.longitude =  [NSNumber numberWithDouble:[firsDictionary[@"long"] doubleValue]];

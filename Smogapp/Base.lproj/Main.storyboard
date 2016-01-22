@@ -60,17 +60,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yW8-YY-zhE">
-                        <barButtonItem key="leftBarButtonItem" title="&lt;Wstecz" id="nOQ-IT-wFO">
-                            <color key="tintColor" red="1" green="0.11242632745804704" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="backButtonClick:" destination="nfS-6L-1Xd" id="EvR-7a-fJe"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="backBarButtonItem" title="Wybierz stację" id="p6l-Za-cLM"/>
                     </navigationItem>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="backButton" destination="nOQ-IT-wFO" id="9Bw-eA-gkR"/>
                         <outlet property="changeMapTypeButton" destination="zPj-Dc-Acu" id="54l-Fo-3vk"/>
                         <outlet property="cityLabel" destination="fhT-Fr-ZW7" id="8ah-BX-KQn"/>
                         <outlet property="cityMapView" destination="2VA-G1-6Nx" id="PuE-qK-H7C"/>
@@ -81,7 +74,7 @@
             </objects>
             <point key="canvasLocation" x="1301" y="442"/>
         </scene>
-        <!--Ostatnie odczyty:-->
+        <!--Station Result Table View Controller-->
         <scene sceneID="Pbj-z6-3eS">
             <objects>
                 <tableViewController storyboardIdentifier="dbResults" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XV9-TC-5x0" customClass="StationResultTableViewController" sceneMemberID="viewController">
@@ -120,8 +113,8 @@
                             <outlet property="delegate" destination="XV9-TC-5x0" id="Z1w-AH-B8M"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Ostatnie odczyty:" id="eBH-L7-zMb">
-                        <barButtonItem key="backBarButtonItem" title="&lt;Wstecz" id="iTh-j0-b7a"/>
+                    <navigationItem key="navigationItem" id="eBH-L7-zMb">
+                        <barButtonItem key="backBarButtonItem" title="Wybierz pomiar" id="v9d-vS-7B6"/>
                     </navigationItem>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -157,13 +150,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vm0-RX-g7Q">
-                                            <rect key="frame" x="8" y="24" width="32" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTu-Hg-lJR">
-                                            <rect key="frame" x="39" y="24" width="79" height="21"/>
+                                            <rect key="frame" x="8" y="24" width="45" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -171,6 +158,12 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9G-TB-1zx">
                                             <rect key="frame" x="126" y="24" width="186" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTu-Hg-lJR">
+                                            <rect key="frame" x="55" y="24" width="79" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>

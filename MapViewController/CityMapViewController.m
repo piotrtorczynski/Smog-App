@@ -126,7 +126,7 @@
     
     MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
     point.coordinate = pinCoordinate;
-    point.title = [NSString stringWithFormat:@"Punkt: %@", description];
+    point.title = [NSString stringWithFormat:@"%@", description];
     
     [self.cityMapView addAnnotation:point];
     
