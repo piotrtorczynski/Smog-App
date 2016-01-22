@@ -17,6 +17,7 @@
 @property NSNumber *longitude;
 @property NSNumber *lattitude;
 
+
 @property Station *selectedStation;
 
 @end

@@ -109,7 +109,7 @@
             pollution.name = sanitizedJSON[@"parameterdesc"];
             pollution.value = sanitizedJSON[@"value"];
             pollution.timestamp = sanitizedJSON[@"timestamp"];
-            
+            pollution.unit = sanitizedJSON[@"unit"];
             station.city = sanitizedJSON[@"city"];
             station.name = sanitizedJSON[@"parameterdesc"];
             station.location = sanitizedJSON[@"location"];
@@ -155,7 +155,7 @@
             pollution.timestamp = [NSNumber numberWithInt:[dictionaryJSON[@"timestamp"]integerValue]];
             pollution.name = dictionaryJSON[@"parameterdesc"];
             pollution.value = [NSNumber numberWithDouble:[dictionaryJSON[@"long"] integerValue]];
-            
+            pollution.unit = dictionaryJSON[@"unit"];
             [station addParametersObject:pollution];
         }
         

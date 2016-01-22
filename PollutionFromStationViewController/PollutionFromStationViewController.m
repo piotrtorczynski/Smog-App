@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "Pollution+CoreDataProperties.h"
 #import "Station+CoreDataProperties.h"
+#import "PollutionCellTableViewCell.h"
 
 @interface PollutionFromStationViewController ()
 @property NSArray *stationsArray;
@@ -47,14 +48,17 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pollutionCell" forIndexPath:indexPath];
+    PollutionCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pollutionCell" forIndexPath:indexPath];
     
     
     Pollution *pollution = [ self.pollutionsArray objectAtIndex:indexPath.row];
     
-    [cell.textLabel setText:pollution.name];
-    [cell.detailTextLabel setText:pollution.desc];
-    
+
+    [cell.paramatereNameLabel setText:pollution.name];
+    [cell.parameterValueLabel setText:pollution.value.stringValue];
+    [cell.parameterUnitLabel setText:pollution.unit];
+    [cell.parameterDescLabel setText:pollution.desc];
+
     return cell;
 }
 

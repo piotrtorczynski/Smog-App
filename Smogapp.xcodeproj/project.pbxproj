@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		05BC56461C4050B400FAB24F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BC56451C4050B400FAB24F /* CoreLocation.framework */; };
 		05BC56481C4050BC00FAB24F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BC56471C4050BC00FAB24F /* MapKit.framework */; };
+		05CA94681C5218980059D912 /* PollutionCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CA94671C5218980059D912 /* PollutionCellTableViewCell.m */; };
 		D20363611C3FF068002664D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D20363601C3FF068002664D0 /* main.m */; };
 		D20363641C3FF068002664D0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D20363631C3FF068002664D0 /* AppDelegate.m */; };
 		D203636A1C3FF068002664D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D20363681C3FF068002664D0 /* Main.storyboard */; };
@@ -30,6 +31,8 @@
 /* Begin PBXFileReference section */
 		05BC56451C4050B400FAB24F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		05BC56471C4050BC00FAB24F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		05CA94661C5218980059D912 /* PollutionCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PollutionCellTableViewCell.h; path = PollutionFromStationViewController/PollutionCellTableViewCell.h; sourceTree = "<group>"; };
+		05CA94671C5218980059D912 /* PollutionCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PollutionCellTableViewCell.m; path = PollutionFromStationViewController/PollutionCellTableViewCell.m; sourceTree = "<group>"; };
 		D203635C1C3FF068002664D0 /* Smogapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smogapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20363601C3FF068002664D0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D20363621C3FF068002664D0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -187,6 +190,8 @@
 			children = (
 				D273E2211C50F9FC008949F1 /* PollutionFromStationViewController.h */,
 				D273E2221C50F9FC008949F1 /* PollutionFromStationViewController.m */,
+				05CA94661C5218980059D912 /* PollutionCellTableViewCell.h */,
+				05CA94671C5218980059D912 /* PollutionCellTableViewCell.m */,
 			);
 			name = PollutionFromStationViewController;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 				D273E2231C50F9FC008949F1 /* PollutionFromStationViewController.m in Sources */,
 				D20363611C3FF068002664D0 /* main.m in Sources */,
 				D273E23A1C510993008949F1 /* Pollution+CoreDataProperties.m in Sources */,
+				05CA94681C5218980059D912 /* PollutionCellTableViewCell.m in Sources */,
 				D203636D1C3FF068002664D0 /* Smogapp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
