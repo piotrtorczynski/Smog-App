@@ -104,7 +104,7 @@
         for (NSString *key in mutableJSON.allKeys) {
             
             if (sanitizedJSON[@"value"] ==nil) {
-    
+                
             }
             else{
                 pollution.date = sanitizedJSON[@"date"];
@@ -142,9 +142,7 @@
         NSNumberFormatter *formater = [[NSNumberFormatter alloc] init];
         formater.numberStyle = NSNumberFormatterCurrencyStyle;
         
-        int i=0;
-        int j=0;
-        int k=0;
+        
         station.name = firsDictionary[@"parameterdesc"];
         station.locationdesc = firsDictionary[@"locationdesc"];
         station.longitude =  [NSNumber numberWithDouble:[firsDictionary[@"long"] doubleValue]];
@@ -155,12 +153,9 @@
         for (dictionaryJSON in mutableJSONArray) {
             Pollution *pollution = [NSEntityDescription insertNewObjectForEntityForName:@"Pollution" inManagedObjectContext:self.context];
             if (dictionaryJSON[@"value"] == nil) {
-               
+                
             }
             else{
-                NSLog(@"j: %d", j++);
-                pollution.value = [NSNumber numberWithDouble:[dictionaryJSON[@"value"] integerValue]];
-                
                 pollution.date = dictionaryJSON[@"date"];
                 
                 if (dictionaryJSON[@"caqidesc"] == nil) {
@@ -172,15 +167,11 @@
                 pollution.value = [NSNumber numberWithDouble:[dictionaryJSON[@"value"] integerValue]];
                 pollution.timestamp = [NSNumber numberWithInt:[dictionaryJSON[@"timestamp"]integerValue]];
                 pollution.name = dictionaryJSON[@"parameterdesc"];
-                
-                
                 pollution.unit = dictionaryJSON[@"unit"];
                 [station addParametersObject:pollution];
             }
-       NSLog(@"k: %d", k++);
+            
         }
-        
-        
         
     }
     
@@ -216,7 +207,7 @@
     self.stationArray = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
     self.stations = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
-    if(self.stationArray.count == nil ){
+    if(self.stationArray.count == (NSUInteger)nil ){
         [self saveJSONToCoreData:JSON];
     }
     
