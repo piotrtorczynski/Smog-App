@@ -87,43 +87,26 @@
     return cityLocations;
     
 }
-
--(void)parseStationFromLocationJSON:(id)JSON{
+-(void)saveJSONToCoreData:(id)JSON{
+    
     NSDictionary *sanitizedJSON = [self sanitizedDictionaryWithJSON:JSON];
     NSError *error = nil;
-    
-    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-    f.numberStyle = NSNumberFormatterDecimalStyle;
-    
-    
-    NSMutableArray *mutableJSONArray = [JSON mutableCopy];
-    NSDictionary *firsDictionary = [mutableJSONArray objectAtIndex:1];
-    
-    self.timeStamp = [firsDictionary valueForKey:@"timestamp"];
-    self.longitude = [firsDictionary valueForKey:@"long"];
-    self.lattitude = [firsDictionary valueForKey:@"lat"];
-    
-    //    NSPredicate *timestampPredicate = [NSPredicate predicateWithFormat:@"timestamp == %@",self.timeStamp];
-    NSPredicate *longitudePredicate = [NSPredicate predicateWithFormat:@"lattitude == %@",self.lattitude];
-    NSPredicate *lattitudePredicate = [NSPredicate predicateWithFormat:@"longitude == %@",self.longitude];
-    
-    NSPredicate *fetchPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[lattitudePredicate, longitudePredicate]];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Station"];
-    [fetchRequest setPredicate:fetchPredicate];
-    
-    
-    self.stationArray = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    self.stations = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    
-    if(self.stationArray.count == nil ){
+    if([JSON isKindOfClass:[NSDictionary class]]){
         
-        if([JSON isKindOfClass:[NSDictionary class]]){
-            Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:self.context];
-            Pollution *pollution = [NSEntityDescription insertNewObjectForEntityForName:@"Pollution" inManagedObjectContext:self.context];
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        f.numberStyle = NSNumberFormatterDecimalStyle;
+        
+        Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:self.context];
+        Pollution *pollution = [NSEntityDescription insertNewObjectForEntityForName:@"Pollution" inManagedObjectContext:self.context];
+        
+        NSMutableDictionary *mutableJSON = [JSON mutableCopy];
+        
+        for (NSString *key in mutableJSON.allKeys) {
             
-            NSMutableDictionary *mutableJSON = [JSON mutableCopy];
-            
-            for (NSString *key in mutableJSON.allKeys) {
+            if (sanitizedJSON[@"value"] ==nil) {
+    
+            }
+            else{
                 pollution.date = sanitizedJSON[@"date"];
                 
                 if (sanitizedJSON[@"caqidesc"] == nil) {
@@ -147,30 +130,35 @@
                 
                 [station addParametersObject:pollution];
             }
-            
         }
-        else if([JSON isKindOfClass:[NSArray class]]){
-            
-            Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:self.context];
-            
-            NSMutableDictionary *dictionaryJSON ;
-            NSMutableArray *mutableJSONArray = [JSON mutableCopy];
-            NSDictionary *firsDictionary = [mutableJSONArray objectAtIndex:1];
-            NSNumberFormatter *formater = [[NSNumberFormatter alloc] init];
-            formater.numberStyle = NSNumberFormatterCurrencyStyle;
-            
-            
-            //        station.city = firsDictionary[@"city"] ;
-            station.name = firsDictionary[@"parameterdesc"];
-            station.locationdesc = firsDictionary[@"locationdesc"];
-            station.longitude =  [NSNumber numberWithDouble:[firsDictionary[@"long"] doubleValue]];
-            station.lattitude = [NSNumber numberWithDouble:[firsDictionary[@"lat"] doubleValue]];
-            station.location = firsDictionary[@"location"];
-            station.timestamp = [NSNumber numberWithInt:[firsDictionary[@"timestamp"]integerValue]];
-            
-            for (dictionaryJSON in mutableJSONArray) {
-                Pollution *pollution = [NSEntityDescription insertNewObjectForEntityForName:@"Pollution" inManagedObjectContext:self.context];
-                
+    }
+    else if([JSON isKindOfClass:[NSArray class]]){
+        
+        Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:self.context];
+        
+        NSMutableDictionary *dictionaryJSON ;
+        NSMutableArray *mutableJSONArray = [JSON mutableCopy];
+        NSDictionary *firsDictionary = [mutableJSONArray objectAtIndex:1];
+        NSNumberFormatter *formater = [[NSNumberFormatter alloc] init];
+        formater.numberStyle = NSNumberFormatterCurrencyStyle;
+        
+        int i=0;
+        int j=0;
+        int k=0;
+        station.name = firsDictionary[@"parameterdesc"];
+        station.locationdesc = firsDictionary[@"locationdesc"];
+        station.longitude =  [NSNumber numberWithDouble:[firsDictionary[@"long"] doubleValue]];
+        station.lattitude = [NSNumber numberWithDouble:[firsDictionary[@"lat"] doubleValue]];
+        station.location = firsDictionary[@"location"];
+        station.timestamp = [NSNumber numberWithInt:[firsDictionary[@"timestamp"]integerValue]];
+        
+        for (dictionaryJSON in mutableJSONArray) {
+            Pollution *pollution = [NSEntityDescription insertNewObjectForEntityForName:@"Pollution" inManagedObjectContext:self.context];
+            if (dictionaryJSON[@"value"] == nil) {
+               
+            }
+            else{
+                NSLog(@"j: %d", j++);
                 pollution.value = [NSNumber numberWithDouble:[dictionaryJSON[@"value"] integerValue]];
                 
                 pollution.date = dictionaryJSON[@"date"];
@@ -189,13 +177,47 @@
                 pollution.unit = dictionaryJSON[@"unit"];
                 [station addParametersObject:pollution];
             }
+       NSLog(@"k: %d", k++);
         }
-        //        }
         
-        if (![self.context save:&error]) {
-            NSLog(@"Unable to save managed object context for station.");
-            NSLog(@"%@, %@", error, error.localizedDescription);
-        }
+        
+        
+    }
+    
+    if (![self.context save:&error]) {
+        NSLog(@"Unable to save managed object context for station.");
+        NSLog(@"%@, %@", error, error.localizedDescription);
+    }
+}
+
+
+
+-(void)parseStationFromLocationJSON:(id)JSON{
+    
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    
+    
+    NSMutableArray *mutableJSONArray = [JSON mutableCopy];
+    NSDictionary *firsDictionary = [mutableJSONArray objectAtIndex:1];
+    
+    self.timeStamp = [firsDictionary valueForKey:@"timestamp"];
+    self.longitude = [firsDictionary valueForKey:@"long"];
+    self.lattitude = [firsDictionary valueForKey:@"lat"];
+    
+    NSPredicate *longitudePredicate = [NSPredicate predicateWithFormat:@"lattitude == %@",self.lattitude];
+    NSPredicate *lattitudePredicate = [NSPredicate predicateWithFormat:@"longitude == %@",self.longitude];
+    
+    NSPredicate *fetchPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[lattitudePredicate, longitudePredicate]];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Station"];
+    [fetchRequest setPredicate:fetchPredicate];
+    
+    
+    self.stationArray = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    self.stations = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    if(self.stationArray.count == nil ){
+        [self saveJSONToCoreData:JSON];
     }
     
     else {
@@ -216,8 +238,8 @@
         }
         NSLog(@"%@",self.timeStamp);
         NSLog(@"time  %@",timestampSet);
-    //    NSMutableArray *timestampsArray = [NSMutableArray arrayWithObject: [timestampSet allObjects]];
         BOOL isTimeStampInCoreData = NO;
+        
         for (NSNumber *timestampNumber in timestampSet) {
             if ([timestampNumber integerValue] == [self.timeStamp integerValue]) {
                 isTimeStampInCoreData = YES;
@@ -229,85 +251,7 @@
         }
         else{
             
-            
-            
-            if([JSON isKindOfClass:[NSDictionary class]]){
-                Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:self.context];
-                Pollution *pollution = [NSEntityDescription insertNewObjectForEntityForName:@"Pollution" inManagedObjectContext:self.context];
-                
-                NSMutableDictionary *mutableJSON = [JSON mutableCopy];
-                
-                for (NSString *key in mutableJSON.allKeys) {
-                    pollution.date = sanitizedJSON[@"date"];
-                    
-                    if (sanitizedJSON[@"caqidesc"] == nil) {
-                        pollution.desc = sanitizedJSON[@"aqidesc"];
-                    }
-                    else {
-                        pollution.desc = sanitizedJSON[@"caqidesc"];
-                    }
-                    
-                    pollution.name = sanitizedJSON[@"parameterdesc"];
-                    pollution.value = [NSNumber numberWithDouble:[sanitizedJSON[@"value"] integerValue]];
-                    pollution.timestamp = sanitizedJSON[@"timestamp"];
-                    pollution.unit = sanitizedJSON[@"unit"];
-                    
-                    station.name = sanitizedJSON[@"parameterdesc"];
-                    station.location = sanitizedJSON[@"location"];
-                    station.locationdesc = sanitizedJSON[@"locationdesc"];
-                    station.timestamp = [NSNumber numberWithInt:[sanitizedJSON[@"timestamp"]integerValue]];
-                    station.longitude = [f numberFromString: sanitizedJSON[@"long"]];
-                    station.lattitude = [f numberFromString: sanitizedJSON[@"lat"]];
-                    
-                    [station addParametersObject:pollution];
-                }
-                
-            }
-            else if([JSON isKindOfClass:[NSArray class]]){
-                
-                Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:self.context];
-                
-                NSMutableDictionary *dictionaryJSON ;
-                NSMutableArray *mutableJSONArray = [JSON mutableCopy];
-                NSDictionary *firsDictionary = [mutableJSONArray objectAtIndex:1];
-                NSNumberFormatter *formater = [[NSNumberFormatter alloc] init];
-                formater.numberStyle = NSNumberFormatterCurrencyStyle;
-                
-                station.name = firsDictionary[@"parameterdesc"];
-                station.locationdesc = firsDictionary[@"locationdesc"];
-                station.longitude =  [NSNumber numberWithDouble:[firsDictionary[@"long"] doubleValue]];
-                station.lattitude = [NSNumber numberWithDouble:[firsDictionary[@"lat"] doubleValue]];
-                station.location = firsDictionary[@"location"];
-                station.timestamp = [NSNumber numberWithInt:[firsDictionary[@"timestamp"]integerValue]];
-                
-                for (dictionaryJSON in mutableJSONArray) {
-                    Pollution *pollution = [NSEntityDescription insertNewObjectForEntityForName:@"Pollution" inManagedObjectContext:self.context];
-                    
-                    pollution.value = [NSNumber numberWithDouble:[dictionaryJSON[@"value"] integerValue]];
-                    
-                    pollution.date = dictionaryJSON[@"date"];
-                    
-                    if (dictionaryJSON[@"caqidesc"] == nil) {
-                        pollution.desc = dictionaryJSON[@"aqidesc"];
-                    }
-                    else {
-                        pollution.desc = dictionaryJSON[@"caqidesc"];
-                    }
-                    pollution.value = [NSNumber numberWithDouble:[dictionaryJSON[@"value"] integerValue]];
-                    pollution.timestamp = [NSNumber numberWithInt:[dictionaryJSON[@"timestamp"]integerValue]];
-                    pollution.name = dictionaryJSON[@"parameterdesc"];
-                    
-                    
-                    pollution.unit = dictionaryJSON[@"unit"];
-                    [station addParametersObject:pollution];
-                }
-            }
-            
-            if (![self.context save:&error]) {
-                NSLog(@"Unable to save managed object context for station.");
-                NSLog(@"%@, %@", error, error.localizedDescription);
-            }
-            
+            [self saveJSONToCoreData:JSON];
             
         }
         
