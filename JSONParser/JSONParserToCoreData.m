@@ -14,7 +14,9 @@
 @interface JSONParserToCoreData()
 
 @property NSArray *citiesArrayFromRawJSON;
-
+@property NSArray *timeStamps;
+@property NSArray *stationArray;
+@property NSNumber *timeStamp;
 @end
 
 @implementation JSONParserToCoreData
@@ -84,11 +86,25 @@
 
 -(void)parseStationFromLocationJSON:(id)JSON{
     NSDictionary *sanitizedJSON = [self sanitizedDictionaryWithJSON:JSON];
-    
-    NSError *error = nil;
+            NSError *error = nil;
     
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
+    
+  
+    NSMutableArray *mutableJSONArray = [JSON mutableCopy];
+    NSDictionary *firsDictionary = [mutableJSONArray objectAtIndex:1];
+    self.timeStamp = [firsDictionary valueForKey:@"timestamp"];
+    
+    NSPredicate *timestampPredicate = [NSPredicate predicateWithFormat:@"timestamp == %@",self.timeStamp];
+
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Station"];
+    [fetchRequest setPredicate:timestampPredicate];
+    
+    
+    self.stationArray = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    if(self.stationArray.count == 0 ){
+  
     
     if([JSON isKindOfClass:[NSDictionary class]]){
         Station *station = [NSEntityDescription insertNewObjectForEntityForName:@"Station" inManagedObjectContext:self.context];
@@ -165,6 +181,10 @@
     if (![self.context save:&error]) {
         NSLog(@"Unable to save managed object context for station.");
         NSLog(@"%@, %@", error, error.localizedDescription);
+    }
+    }
+    else{
+        return;
     }
 }
 @end
