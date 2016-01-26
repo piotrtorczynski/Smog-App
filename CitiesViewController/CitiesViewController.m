@@ -34,13 +34,9 @@
             self.parser = [[JSONParserToCoreData alloc]init];
             self.cities = [self.parser parseCitiesFromJSON:response];
             [self.citiesTableView reloadData];
-              NSLog(@"Cities :%@",self.cities);
         }];
     });
     dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
-    
-  
-    
 
 }
 -(void)viewWillAppear:(BOOL)animated{
