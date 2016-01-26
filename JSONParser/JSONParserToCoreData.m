@@ -227,8 +227,8 @@
         for (Pollution *pol in self.pollutionsArray) {
             timestampSet =[NSSet setWithArray: [self.pollutionsArray valueForKey:@"timestamp"]];
         }
-        NSLog(@"%@",self.timeStamp);
-        NSLog(@"time  %@",timestampSet);
+
+        
         BOOL isTimeStampInCoreData = NO;
         
         for (NSNumber *timestampNumber in timestampSet) {

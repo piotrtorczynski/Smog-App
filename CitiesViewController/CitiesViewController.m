@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    cities = [NSArray arrayWithObjects:@"Kraków", @"Tarnów", @"Nowy Sącz", @"Olkusz", @"Skawina", @"Sucha Beskidzka", @"Szarów", @"Szymbark", @"Trzebinia", @"Zakopane", nil];
+    cities = [NSArray arrayWithObjects:@"Kraków", @"Nowy Sącz",  @"Olkusz", @"Skawina", @"Sucha Beskidzka", @"Szarów", @"Szymbark", @"Tarnów", @"Trzebinia", @"Zakopane", nil];
    }
 
 - (void)didReceiveMemoryWarning {

@@ -122,7 +122,6 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="resultTableView" destination="ApM-jt-3Ae" id="sEj-BU-YvL"/>
-                        <segue destination="eam-9T-6ff" kind="push" identifier="showResultForSpecificTime" id="mI0-4p-y0g"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bv5-CJ-eHB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -132,7 +131,7 @@
         <!--Pollution From Station View Controller-->
         <scene sceneID="o5m-qC-c2K">
             <objects>
-                <tableViewController id="eam-9T-6ff" customClass="PollutionFromStationViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PollutionFromStationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eam-9T-6ff" customClass="PollutionFromStationViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="54" sectionHeaderHeight="28" sectionFooterHeight="28" id="x6k-9L-SV7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -141,7 +140,7 @@
                         <color key="sectionIndexBackgroundColor" red="0.63523952086293412" green="0.84808747514690208" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pollutionCell" rowHeight="53" id="DI3-RT-U4x" customClass="PollutionCellTableViewCell">
-                                <rect key="frame" x="0.0" y="72" width="320" height="53"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="53"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DI3-RT-U4x" id="CWw-wY-IAx">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>

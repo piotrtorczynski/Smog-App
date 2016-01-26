@@ -34,6 +34,7 @@
     
     
     NSPredicate *timeStampPredicate = [NSPredicate predicateWithFormat:@"timestamp == %@",self.tableViewTimeStamp];
+
     self.pollutionsArray = [self.selectedStation.parameters.allObjects filteredArrayUsingPredicate:timeStampPredicate];
     self.pollutionsArray = [self.pollutionsArray sortedArrayUsingDescriptors:sortDescriptors];
     

@@ -101,7 +101,6 @@
     NSNumber *longitude = [[NSNumber alloc]init];
     
     NSString *description;
-    NSString *parameterdescription;
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Station"];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"location == %@", location]];
@@ -114,7 +113,7 @@
             lattitude = station.lattitude;
             longitude = station.longitude;
             description = station.locationdesc;
-            parameterdescription = station.name;
+        
             NSLog(@"%f %f",station.lattitude.doubleValue, station.longitude.doubleValue );
         }
         

@@ -34,7 +34,7 @@
     NSPredicate *fetchPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[lattitudePredicate, longitudePredicate]];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Station"];
     [fetchRequest setPredicate:fetchPredicate];
-   
+    
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
     self.stationPollution = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
@@ -48,7 +48,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-   return  1;
+    return  1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -58,53 +58,39 @@
 }
 
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    Station *station = [self.stationPollution objectAtIndex:indexPath.row];
+    NSNumber *time = [NSNumber new];
+    
+    time = station.timestamp;
+   
+    PollutionFromStationViewController *pollutionFromStationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PollutionFromStationViewController"];
+    pollutionFromStationViewController.tableViewTimeStamp = time;
+    pollutionFromStationViewController.lattitude = self.lattitude;
+    pollutionFromStationViewController.longitude = self.longitude;
+    pollutionFromStationViewController.selectedStation = station;
+    
+    [self.navigationController pushViewController:pollutionFromStationViewController animated:YES];
+    
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"resultTableCell" forIndexPath:indexPath];
     
     
     Station *station = [self.stationPollution objectAtIndex:indexPath.row];
-    self.resultTimeStamp =station.timestamp;
     
-        [cell.textLabel setText:[self parseTimeStampToDate:station.timestamp]];
-        [cell.detailTextLabel setText:@""];
-
-     return cell;
-  
-}
-
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"showResultForSpecificTime"])
-    {
-
-        PollutionFromStationViewController *destinationViewController = segue.destinationViewController;
-
-        NSIndexPath *selectedIndex = (NSIndexPath*)sender;
-        
-        Station *selectedStation = [self.stationPollution objectAtIndex:selectedIndex.row];
-        
-        NSLog(@"selectedStation.parameters.count %u",selectedStation.parameters.count);
-        
-        destinationViewController.tableViewTimeStamp  = self.resultTimeStamp;
-        destinationViewController.lattitude = self.lattitude;
-        destinationViewController.longitude = self.longitude;
-        destinationViewController.selectedStation = selectedStation;
-        
-        
-    } else {
-        NSLog(@"PFS:something else");
-    }
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [cell.textLabel setText:[self parseTimeStampToDate:station.timestamp]];
+    [cell.detailTextLabel setText:@""];
     
-    [self performSegueWithIdentifier:@"showResultForSpecificTime" sender:indexPath];
+    return cell;
     
 }
+
+
 
 -(NSString *)parseTimeStampToDate:(NSNumber *)timestamp{
-
+    
     double unixTimeStamp = [timestamp doubleValue];
     NSTimeInterval _interval=unixTimeStamp;
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
@@ -112,7 +98,7 @@
     [_formatter setLocale:[NSLocale currentLocale]];
     [_formatter setDateFormat:@"dd.MM.yyyy HH:mm"];
     NSString *_date=[_formatter stringFromDate:date];
-
+    
     return _date;
 }
 
