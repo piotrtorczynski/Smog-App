@@ -2,7 +2,7 @@
 //  Pollution+CoreDataProperties.m
 //  Smogapp
 //
-//  Created by Piotr Torczyski on 25/01/16.
+//  Created by Piotr Torczyski on 26/01/16.
 //  Copyright © 2016 Piotr Torczyski. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,7 +13,6 @@
 
 @implementation Pollution (CoreDataProperties)
 
-@dynamic date;
 @dynamic desc;
 @dynamic name;
 @dynamic timestamp;

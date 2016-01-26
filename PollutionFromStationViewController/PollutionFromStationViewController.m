@@ -38,9 +38,6 @@
     self.pollutionsArray = [self.selectedStation.parameters.allObjects filteredArrayUsingPredicate:timeStampPredicate];
     self.pollutionsArray = [self.pollutionsArray sortedArrayUsingDescriptors:sortDescriptors];
     
-    UIEdgeInsets inset = UIEdgeInsetsMake(5, 0, 0, 0);
-    self.tableView.contentInset = inset;
-    
 }
 
 
@@ -59,9 +56,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     PollutionCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pollutionCell" forIndexPath:indexPath];
     
     Pollution *pollution = [ self.pollutionsArray objectAtIndex:indexPath.row];
+    
     
     [cell.paramatereNameLabel setText:pollution.name];
     [cell.parameterValueLabel setText:pollution.value.stringValue];
@@ -87,6 +86,7 @@
     else if ([cell.parameterDescLabel.text isEqual:@"bardzo wysoki"]){
         cell.backgroundColor = [self colorWithHexString:@"960018"];
     }
+    
     else if ([cell.parameterDescLabel.text isEqual:@"dobry"]){
         cell.backgroundColor = [self colorWithHexString:@"960018"];
     }

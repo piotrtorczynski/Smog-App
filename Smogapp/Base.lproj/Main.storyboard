@@ -131,7 +131,7 @@
         <!--Pollution From Station View Controller-->
         <scene sceneID="o5m-qC-c2K">
             <objects>
-                <tableViewController storyboardIdentifier="PollutionFromStationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eam-9T-6ff" customClass="PollutionFromStationViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PollutionFromStationViewController" modalTransitionStyle="flipHorizontal" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eam-9T-6ff" customClass="PollutionFromStationViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="54" sectionHeaderHeight="28" sectionFooterHeight="28" id="x6k-9L-SV7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -139,7 +139,7 @@
                         <color key="separatorColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pollutionCell" rowHeight="53" id="DI3-RT-U4x" customClass="PollutionCellTableViewCell">
-                                <rect key="frame" x="0.0" y="92" width="320" height="53"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="53"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DI3-RT-U4x" id="CWw-wY-IAx">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
@@ -206,8 +206,10 @@
                             <outlet property="delegate" destination="eam-9T-6ff" id="0We-uU-Vy6"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="kRg-Rx-0Yh"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="stationTableView" destination="x6k-9L-SV7" id="z64-eW-ceS"/>
                     </connections>

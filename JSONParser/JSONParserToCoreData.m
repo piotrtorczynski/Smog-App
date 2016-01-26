@@ -107,13 +107,13 @@
                 
             }
             else{
-                pollution.date = sanitizedJSON[@"date"];
+              
                 
-                if (sanitizedJSON[@"caqidesc"] == nil) {
-                    pollution.desc = sanitizedJSON[@"aqidesc"];
+                if (sanitizedJSON[@"aqidesc"] == nil) {
+                    pollution.desc = sanitizedJSON[@"caqidesc"];
                 }
                 else {
-                    pollution.desc = sanitizedJSON[@"caqidesc"];
+                    pollution.desc = sanitizedJSON[@"aqidesc"];
                 }
                 
                 pollution.name = sanitizedJSON[@"parameterdesc"];
@@ -155,9 +155,7 @@
             if (dictionaryJSON[@"value"] == nil) {
                 
             }
-            else{
-                pollution.date = dictionaryJSON[@"date"];
-                
+            else{                
                 if (dictionaryJSON[@"caqidesc"] == nil) {
                     pollution.desc = dictionaryJSON[@"aqidesc"];
                 }
