@@ -174,7 +174,7 @@
     }
     
     if (![self.context save:&error]) {
-        NSLog(@"Unable to save managed object context for station.");
+        NSLog(@"Unable to save managed object context for stations.");
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
 }
