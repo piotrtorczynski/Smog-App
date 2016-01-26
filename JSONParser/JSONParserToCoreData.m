@@ -19,8 +19,8 @@
 @property NSNumber *timeStamp;
 @property NSString *longitude;
 @property NSString *lattitude;
-@property  Station *stations;
 @property NSArray *pollutionsArray;
+@property  Station *stations;
 @end
 
 @implementation JSONParserToCoreData
@@ -208,13 +208,12 @@
     
     NSPredicate *longitudePredicate = [NSPredicate predicateWithFormat:@"lattitude == %@",self.lattitude];
     NSPredicate *lattitudePredicate = [NSPredicate predicateWithFormat:@"longitude == %@",self.longitude];
-    
     NSPredicate *fetchPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[lattitudePredicate, longitudePredicate]];
+    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Station"];
     [fetchRequest setPredicate:fetchPredicate];
-    
-    
-    self.stationArray = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
+
+   // self.stationArray = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
     self.stations = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     if(self.stationArray.count == (NSUInteger)nil ){
@@ -231,14 +230,11 @@
         NSFetchRequest *pollutionRequest = [[NSFetchRequest alloc] initWithEntityName:@"Pollution"];
         [fetchRequest setPredicate:fetchPredicate];
         
-        
         self.pollutionsArray = [[self.context executeFetchRequest:pollutionRequest error:nil] mutableCopy];
         NSSet *timestampSet;
         for (Pollution *pol in self.pollutionsArray) {
             timestampSet =[NSSet setWithArray: [self.pollutionsArray valueForKey:@"timestamp"]];
         }
-        
-        
         BOOL isTimeStampInCoreData = NO;
         
         for (NSNumber *timestampNumber in timestampSet) {

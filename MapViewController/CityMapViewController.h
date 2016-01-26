@@ -11,22 +11,13 @@
 
 @interface CityMapViewController : UIViewController  <MKMapViewDelegate, CLLocationManagerDelegate>
 
-//labels
 @property (weak, nonatomic) IBOutlet UILabel *cityLabel;
 @property (nonatomic, strong) NSString *cityName;
-
-//buttons
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *changeMapTypeButton;
 
-//actions
-- (IBAction)backButtonClick:(id)sender;
-- (IBAction)checkJSONParsing:(id)sender;
-
-//mapView
 @property (weak, nonatomic) IBOutlet MKMapView *cityMapView;
 @property(nonatomic, retain) CLLocationManager *locationManager;
-
 @property (nonatomic) NSManagedObjectContext *context;
+- (IBAction)changeMapTypeButtonAction:(id)sender;
 
 @end

@@ -12,8 +12,10 @@
 #import "JSONDownloader.h"
 
 @interface ViewController ()
+
 @property NSArray *cities;
 @property (nonatomic) JSONParserToCoreData *parser;
+
 @end
 
 @implementation ViewController{
@@ -22,8 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_group_t group = dispatch_group_create();
@@ -38,11 +38,6 @@
     });
     dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
 
-}
--(void)viewWillAppear:(BOOL)animated{
-    
-    [super viewWillAppear:animated];
-    
 }
 
 - (void)didReceiveMemoryWarning {

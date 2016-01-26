@@ -183,11 +183,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)backButtonClick:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
-- (IBAction)checkJSONParsing:(id)sender {
+
+- (IBAction)changeMapTypeButtonAction:(id)sender {
     
     [self.changeMapTypeButton addTarget:self action:@selector(changeMapType:) forControlEvents:UIControlEventTouchDown];
     [self.changeMapTypeButton setTitle:@"Zmień rodzaj mapy" forState:UIControlStateNormal];

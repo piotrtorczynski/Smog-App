@@ -36,7 +36,7 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="checkJSONParsing:" destination="nfS-6L-1Xd" eventType="touchUpInside" id="hQF-0M-fSs"/>
+                                    <action selector="changeMapTypeButtonAction:" destination="nfS-6L-1Xd" eventType="touchUpInside" id="Ekm-Z4-MCi"/>
                                 </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2VA-G1-6Nx">

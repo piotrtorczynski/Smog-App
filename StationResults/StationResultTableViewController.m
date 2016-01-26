@@ -77,7 +77,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"resultTableCell" forIndexPath:indexPath];
     
-    
     Station *station = [self.stationPollution objectAtIndex:indexPath.row];
     
     [cell.textLabel setText:[self parseTimeStampToDate:station.timestamp]];
@@ -87,19 +86,17 @@
     
 }
 
-
-
 -(NSString *)parseTimeStampToDate:(NSNumber *)timestamp{
     
     double unixTimeStamp = [timestamp doubleValue];
-    NSTimeInterval _interval=unixTimeStamp;
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
-    NSDateFormatter *_formatter=[[NSDateFormatter alloc]init];
-    [_formatter setLocale:[NSLocale currentLocale]];
-    [_formatter setDateFormat:@"dd.MM.yyyy HH:mm"];
-    NSString *_date=[_formatter stringFromDate:date];
+    NSTimeInterval interval=unixTimeStamp;
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:interval];
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    [formatter setLocale:[NSLocale currentLocale]];
+    [formatter setDateFormat:@"dd.MM.yyyy HH:mm"];
+    NSString *parsedDate=[formatter stringFromDate:date];
     
-    return _date;
+    return parsedDate;
 }
 
 
