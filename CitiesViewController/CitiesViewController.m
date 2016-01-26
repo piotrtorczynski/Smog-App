@@ -9,19 +9,45 @@
 #import "CiteisViewController.h"
 #import "CityMapViewController.h"
 #import "JSONParserToCoreData.h"
+#import "JSONDownloader.h"
 
 @interface ViewController ()
-
+@property NSArray *cities;
+@property (nonatomic) JSONParserToCoreData *parser;
 @end
 
 @implementation ViewController{
-    NSArray *cities;
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    cities = [NSArray arrayWithObjects:@"Kraków", @"Nowy Sącz",  @"Olkusz", @"Skawina", @"Sucha Beskidzka", @"Szarów", @"Szymbark", @"Tarnów", @"Trzebinia", @"Zakopane", nil];
-   }
+    
+    
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_async(group, queue, ^{
+        
+        JSONDownloader *downloader = [[JSONDownloader alloc]init];
+        [downloader getAllCitiesWithCallback:^(BOOL parseSuccess, id response, NSError *connectionError) {
+            self.parser = [[JSONParserToCoreData alloc]init];
+            self.cities = [self.parser parseCitiesFromJSON:response];
+            [self.citiesTableView reloadData];
+              NSLog(@"Cities :%@",self.cities);
+        }];
+    });
+    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+    
+  
+    
+
+}
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -30,7 +56,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [cities count];
+    return [self.cities count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -43,7 +69,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     
-    cell.textLabel.text = [cities objectAtIndex:indexPath.row];
+    cell.textLabel.text = [self.cities objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -51,7 +77,7 @@
     if ([segue.identifier isEqualToString:@"showCityMap"]) {
         NSIndexPath *indexPath = [self.citiesTableView indexPathForSelectedRow];
         CityMapViewController *destViewController = segue.destinationViewController;
-        destViewController.cityName = [cities objectAtIndex:indexPath.row];
+        destViewController.cityName = [self.cities objectAtIndex:indexPath.row];
     }
 }
 

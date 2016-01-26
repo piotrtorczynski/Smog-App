@@ -73,6 +73,18 @@
     return returnData;
 }
 
+-(NSArray *)parseCitiesFromJSON:(id)JSON{
+    NSArray *cities;
+    NSDictionary *sanitizedJSON = [self sanitizedDictionaryWithJSON:JSON];
+    NSSet *citySet;
+    
+    citySet = [NSSet setWithArray:[sanitizedJSON valueForKey:@"citydesc"]];
+    cities = [citySet allObjects];
+    
+    cities = [cities sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    return  cities;
+}
+
 
 -(NSArray *)parseLocationFromJSON:(id)JSON{
     
@@ -107,7 +119,7 @@
                 
             }
             else{
-              
+                
                 
                 if (sanitizedJSON[@"aqidesc"] == nil) {
                     pollution.desc = sanitizedJSON[@"caqidesc"];
@@ -155,7 +167,7 @@
             if (dictionaryJSON[@"value"] == nil) {
                 
             }
-            else{                
+            else{
                 if (dictionaryJSON[@"caqidesc"] == nil) {
                     pollution.desc = dictionaryJSON[@"aqidesc"];
                 }
@@ -225,7 +237,7 @@
         for (Pollution *pol in self.pollutionsArray) {
             timestampSet =[NSSet setWithArray: [self.pollutionsArray valueForKey:@"timestamp"]];
         }
-
+        
         
         BOOL isTimeStampInCoreData = NO;
         
