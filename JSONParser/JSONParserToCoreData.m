@@ -17,8 +17,8 @@
 @property NSArray *timeStamps;
 @property NSArray *stationArray;
 @property NSNumber *timeStamp;
-@property NSString *longitude;
-@property NSString *lattitude;
+@property NSNumber *longitude;
+@property NSNumber *lattitude;
 @property NSArray *pollutionsArray;
 @property  Station *stations;
 @end
@@ -202,9 +202,11 @@
     NSMutableArray *mutableJSONArray = [JSON mutableCopy];
     NSDictionary *firsDictionary = [mutableJSONArray objectAtIndex:1];
     
-    self.timeStamp = [firsDictionary valueForKey:@"timestamp"];
-    self.longitude = [firsDictionary valueForKey:@"long"];
-    self.lattitude = [firsDictionary valueForKey:@"lat"];
+    self.timeStamp = [NSNumber numberWithInt:[firsDictionary[@"timestamp"]integerValue]];
+    
+    self.longitude = [NSNumber numberWithDouble:[firsDictionary[@"long"] doubleValue]];
+    
+    self.lattitude = [NSNumber numberWithDouble:[firsDictionary[@"lat"] doubleValue]];
     
     NSPredicate *longitudePredicate = [NSPredicate predicateWithFormat:@"lattitude == %@",self.lattitude];
     NSPredicate *lattitudePredicate = [NSPredicate predicateWithFormat:@"longitude == %@",self.longitude];
@@ -212,9 +214,9 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Station"];
     [fetchRequest setPredicate:fetchPredicate];
-
-   // self.stationArray = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    self.stations = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    self.stationArray = [[self.context executeFetchRequest:fetchRequest error:nil] mutableCopy];
+  
     
     if(self.stationArray.count == (NSUInteger)nil ){
         [self saveJSONToCoreData:JSON];
@@ -223,18 +225,15 @@
     else {
         
         NSPredicate *timestampPredicate = [NSPredicate predicateWithFormat:@"timestamp == %@",self.timeStamp];
-        NSPredicate *longitudePredicate = [NSPredicate predicateWithFormat:@"lattitude == %@",self.lattitude];
-        NSPredicate *lattitudePredicate = [NSPredicate predicateWithFormat:@"longitude == %@",self.longitude];
-        
-        NSPredicate *fetchPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[lattitudePredicate, longitudePredicate, timestampPredicate]];
-        NSFetchRequest *pollutionRequest = [[NSFetchRequest alloc] initWithEntityName:@"Pollution"];
-        [fetchRequest setPredicate:fetchPredicate];
+             NSFetchRequest *pollutionRequest = [[NSFetchRequest alloc] initWithEntityName:@"Pollution"];
+        [pollutionRequest setPredicate:timestampPredicate];
         
         self.pollutionsArray = [[self.context executeFetchRequest:pollutionRequest error:nil] mutableCopy];
         NSSet *timestampSet;
-        for (Pollution *pol in self.pollutionsArray) {
+        for (Pollution *pol in self.stationArray) {
             timestampSet =[NSSet setWithArray: [self.pollutionsArray valueForKey:@"timestamp"]];
         }
+         NSLog(@"Timestamp set for location: %@", timestampSet);
         BOOL isTimeStampInCoreData = NO;
         
         for (NSNumber *timestampNumber in timestampSet) {
